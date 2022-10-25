@@ -9,7 +9,7 @@ export default function (props) {
     username: "",
     password: "",
   };
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [values, setValues] = useState(initialValues);
 
@@ -34,7 +34,7 @@ const navigate = useNavigate();
       })
       .then(function (response) {
         props.setAccount(response.data);
-        navigate("/Test")
+        navigate("/Test");
       })
       .catch(function (error) {
         console.log(error);
