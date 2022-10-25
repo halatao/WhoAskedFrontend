@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Auth from "./components/Auth";
+import Test from "./components/Test";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
+  const [account, setAcc] = useState([]);
+  function setAccount(param) {
+    setAcc(param);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <body>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Auth setAccount={setAccount} />} />
+          <Route path="test" element={<Test account={account} />} />
+        </Routes>
+      </BrowserRouter>
+    </body>
   );
 }
 
