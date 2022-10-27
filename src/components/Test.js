@@ -1,5 +1,5 @@
 import React from "react";
-import { redirect } from "react-router-dom";
+import LoginRedirect from "./LoginRedirect";
 export default function(props) {
   if (props.logged) {
     return (
@@ -8,6 +8,6 @@ export default function(props) {
       </div>
     );
   } else {
-    return redirect("/");
+    return <LoginRedirect />;
   }
 }

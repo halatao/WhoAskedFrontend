@@ -3,6 +3,7 @@ import React from "react";
 import "./App.css";
 import Auth from "./components/Auth";
 import Test from "./components/Test";
+import LoginRedirect from "./components/LoginRedirect";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -13,15 +14,29 @@ function App() {
   function setAccount(param) {
     setAcc(param);
   }
-  function setLogged(){
-  setLogg(true);
+  function setLogged() {
+    setLogg(true);
   }
   return (
     <body>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Auth setAccount={setAccount} setLogged={setLogged} error={error} notError={notError} />} />
-          <Route path="/test" element={<Test account={account} logged={logged} />} />
+          <Route path="/" element={<LoginRedirect />} />
+          <Route
+            path="/login"
+            element={
+              <Auth
+                setAccount={setAccount}
+                setLogged={setLogged}
+                error={error}
+                notError={notError}
+              />
+            }
+          />
+          <Route
+            path="/test"
+            element={<Test account={account} logged={logged} />}
+          />
         </Routes>
       </BrowserRouter>
     </body>

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function(props) {
   if (props.justDisplay) {
-    return <div>{props.authError}</div>
+    return <div>{props.authError}</div>;
   } else {
     if (props.text === "") {
       props.setInvalid(true);

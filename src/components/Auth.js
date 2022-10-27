@@ -18,7 +18,6 @@ export default function(props) {
   const [passwordInvalid, setPassInvalid] = useState(true);
   const [secondPasswordInvalid, setSecondPassInvalid] = useState(true);
   const [authError, setAuthError] = useState("");
-  const [url, setUrl] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -53,11 +52,10 @@ export default function(props) {
           navigate("/Test");
         })
         .catch(function(error) {
-            setAuthError("User already exist");
+          setAuthError("User already exist");
           console.log(error);
         });
-    }
-    else{
+    } else {
       axios
         .post("https://localhost:7214/api/Users/LoginUser", {
           username: user,
@@ -69,7 +67,7 @@ export default function(props) {
           navigate("/Test");
         })
         .catch(function(error) {
-            setAuthError("Unable to login");
+          setAuthError("Unable to login");
           console.log(error);
         });
     }
