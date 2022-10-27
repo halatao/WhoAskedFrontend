@@ -11,11 +11,11 @@ export default function(props) {
           type={props.Type}
           placeholder={props.Placeholder}
           onChange={props.handleInputChange}
-          value={props.values.username}
+          value={props.value}
         />
         <Form.Text className="text-muted">
           <ErrorMessage
-            text={props.values.username}
+            text={props.value}
             setInvalid={props.setInvalid}
             error={props.error}
             notError={props.notError}

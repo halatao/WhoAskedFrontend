@@ -3,19 +3,22 @@ import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import FormInput from "./FormInput";
+import ErrorMessage from "./ErrorMessage";
 
 export default function(props) {
   const [register, setRegister] = useState(false);
   const initialValues = {
     username: "",
     password: "",
-    secondPassword: "",
+    password2: "",
   };
   const navigate = useNavigate();
   const [values, setValues] = useState(initialValues);
   const [usernameInvalid, setUserInvalid] = useState(true);
   const [passwordInvalid, setPassInvalid] = useState(true);
   const [secondPasswordInvalid, setSecondPassInvalid] = useState(true);
+  const [authError, setAuthError] = useState("");
+  const [url, setUrl] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,21 +28,51 @@ export default function(props) {
     });
   };
   const validateThenLogin = () => {
-    loginUser(values.username, values.password);
+    if (!usernameInvalid && !passwordInvalid) {
+      if (!register) {
+        authUser(values.username, values.password);
+      } else if (register && !secondPasswordInvalid) {
+        if (values.password === values.password2) {
+          authUser(values.username, values.password);
+        } else if (values.password === values.password2) {
+          setAuthError("Passwords are not matching");
+        }
+      }
+    }
   };
-  const loginUser = (user, pass) => {
-    axios
-      .post("https://localhost:7214/api/Users/LoginUser", {
-        username: user,
-        password: pass,
-      })
-      .then(function(response) {
-        props.setAccount(response.data);
-        navigate("/Test");
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+  const authUser = (user, pass) => {
+    if (register) {
+      axios
+        .post("https://localhost:7214/api/Users/RegUser", {
+          username: user,
+          password: pass,
+        })
+        .then(function(response) {
+          props.setAccount(response.data);
+          props.setLogged();
+          navigate("/Test");
+        })
+        .catch(function(error) {
+            setAuthError("User already exist");
+          console.log(error);
+        });
+    }
+    else{
+      axios
+        .post("https://localhost:7214/api/Users/LoginUser", {
+          username: user,
+          password: pass,
+        })
+        .then(function(response) {
+          props.setAccount(response.data);
+          props.setLogged();
+          navigate("/Test");
+        })
+        .catch(function(error) {
+            setAuthError("Unable to login");
+          console.log(error);
+        });
+    }
   };
 
   function setPasswordInvalid(param) {
@@ -52,7 +85,7 @@ export default function(props) {
     setUserInvalid(param);
   }
   function toggleRegister() {
-    if (register) {
+    if (register === true) {
       setRegister(false);
     } else {
       setRegister(true);
@@ -67,8 +100,7 @@ export default function(props) {
           Label="Username"
           Placeholder="Enter usename"
           handleInputChange={handleInputChange}
-          values={values}
-          text={values.username}
+          value={values.username}
           setInvalid={setUsernameInvalid}
           error={props.error}
           notError={props.notError}
@@ -79,8 +111,7 @@ export default function(props) {
           Label="Password"
           Placeholder="Enter password"
           handleInputChange={handleInputChange}
-          values={values}
-          text={values.password}
+          value={values.password}
           setInvalid={setPasswordInvalid}
           error={props.error}
           notError={props.notError}
@@ -96,9 +127,8 @@ export default function(props) {
         Label="Confirm password"
         Placeholder="Confirm password"
         handleInputChange={handleInputChange}
-        values={values}
-        text={values.secondPassword}
-        setInvalid={setPasswordInvalid}
+        value={values.secondPassword}
+        setInvalid={setSecondPasswordInvalid}
         error={props.error}
         notError={props.notError}
       />
@@ -121,7 +151,8 @@ export default function(props) {
             {getSecondPassword()}
             {getButton("Register")}
           </Form>
-          <p1 onClick={toggleRegister}>Dont have account?</p1>
+          <p1 onClick={toggleRegister}>Already have account?</p1>
+          <ErrorMessage justDisplay={true} authError={authError} />
         </div>
       ) : (
         <div>
@@ -129,7 +160,8 @@ export default function(props) {
             {getLoginForm()}
             {getButton("Login")}
           </Form>
-          <p1 onClick={toggleRegister}>Already have account?</p1>
+          <p1 onClick={toggleRegister}>Dont have account?</p1>
+          <ErrorMessage justDisplay={true} authError={authError} />
         </div>
       )}
     </div>

@@ -1,8 +1,13 @@
-import { useState, React } from "react";
+import React from "react";
+import { redirect } from "react-router-dom";
 export default function(props) {
-  return (
-    <div>
-      <pre>{JSON.stringify(props.account)}</pre>
-    </div>
-  );
+  if (props.logged) {
+    return (
+      <div>
+        <pre>{JSON.stringify(props.account)}</pre>
+      </div>
+    );
+  } else {
+    return redirect("/");
+  }
 }
