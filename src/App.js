@@ -32,6 +32,7 @@ function App() {
               <Auth
                 setAccount={setAccount}
                 setLogged={setLogged}
+                setSelectedChat={setSelectedChat}
                 error={error}
                 notError={notError}
               />
@@ -39,7 +40,14 @@ function App() {
           />
           <Route
             path="/test"
-            element={<Test account={account} logged={logged} selectedChat={selectedChat} setSelectedChat={setSelectedChat} />}
+            element={
+              <Test
+                account={account}
+                logged={logged}
+                selectedChat={selectedChat}
+                setSelectedChat={setSelectedChat}
+              />
+            }
           />
         </Routes>
       </BrowserRouter>
