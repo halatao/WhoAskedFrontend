@@ -50,6 +50,7 @@ export default function (props) {
           props.setAccount(response.data);
           props.setLogged();
           props.setSelectedChat(response.data.chats[0]);
+          console.log(response.data);
           navigate("/Test");
         })
         .catch(function (error) {
