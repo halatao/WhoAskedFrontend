@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import FormInput from "./FormInput";
 import ErrorMessage from "./ErrorMessage";
 
-export default function(props) {
+export default function (props) {
   const [register, setRegister] = useState(false);
   const initialValues = {
     username: "",
@@ -46,13 +46,13 @@ export default function(props) {
           username: user,
           password: pass,
         })
-        .then(function(response) {
+        .then(function (response) {
           props.setAccount(response.data);
           props.setLogged();
           props.setSelectedChat(response.data.chats[0]);
           navigate("/Test");
         })
-        .catch(function(error) {
+        .catch(function (error) {
           setAuthError("User already exist");
           console.log(error);
         });
@@ -62,12 +62,13 @@ export default function(props) {
           username: user,
           password: pass,
         })
-        .then(function(response) {
+        .then(function (response) {
           props.setAccount(response.data);
           props.setLogged();
+          props.setSelectedChat(response.data.chats[0]);
           navigate("/Test");
         })
-        .catch(function(error) {
+        .catch(function (error) {
           setAuthError("Unable to login");
           console.log(error);
         });
