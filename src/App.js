@@ -10,7 +10,6 @@ import axios from "axios";
 function App() {
   const [account, setAcc] = useState([]);
   const [selectedChat, setChat] = useState([]);
-  const [loadedChat, setLoadedChat] = useState([]);
   const [messages, setMessages] = useState([]);
   const [logged, setLogg] = useState(false);
   const [error] = useState("required");
@@ -22,29 +21,21 @@ function App() {
     setLogg(true);
   }
   function setSelectedChat(param) {
-    if (selectedChat.idChat == null) {
-      setLoadedChat(param);
-      setSelectedChat(param);
-      console.log(param);
-    } else {
-      setSelectedChat(param);
-      console.log(param);
+    setChat(param);
+  }
+  function fetchMessages() {
+    if (typeof selectedChat !== undefined) {
+      axios
+        .get(
+          "https://localhost:7214/api/Messages/" + selectedChat.idChat + "/10"
+        )
+        .then((response) => {
+          setMessages(response.data);
+        });
     }
   }
-
-  const fetchMessages = () => {
-    axios
-      .get("https://localhost:7214/api/Messages/" + selectedChat.idChat + "/10")
-      .then((response) => {
-        setMessages(response.data);
-        setLoadedChat(selectedChat);
-      });
-  };
-
   useEffect(() => {
-    if (selectedChat.idChat != loadedChat.idChat) {
-      fetchMessages();
-    }
+    fetchMessages();
   }, []);
   return (
     <body>
