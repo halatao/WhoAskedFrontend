@@ -3,15 +3,15 @@ import { Col, Container, Row } from "react-bootstrap";
 import LoginRedirect from "./LoginRedirect";
 import MessageSend from "./MessageSend";
 import MessagesWindow from "./MessagesWindow";
-export default function(props) {
+export default function (props) {
   if (props.logged) {
     return (
       <div>
         <Container>
           <Col>
             {props.account.chats.map((chat, index) => (
-              <div key={index}>
-                <Col onClick={props.setSelectedChat(chat)}>
+              <div key={index} onClick={props.setSelectedChat(chat)}>
+                <Col>
                   <div>User:{chat.users[1].username}</div>
                   <div>Status:{chat.users[1].status}</div>
                   <div>Last message:{chat.lastMessage}</div>
@@ -23,7 +23,7 @@ export default function(props) {
           <br />
 
           <Col>
-            <MessagesWindow queueId={props.selectedChat.idChat}></MessagesWindow>
+            <MessagesWindow messages={props.messages}></MessagesWindow>
           </Col>
           <Col>
             <MessageSend

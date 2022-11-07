@@ -4,14 +4,14 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 
-export default function(props) {
+export default function (props) {
   const [message, setMessage] = useState("");
   const [messageInvalid, setMessInvalid] = useState(true);
   function setMessageInvalid(param) {
     setMessInvalid(param);
   }
   const handleInputChange = (e) => {
-    setMessage(e.target.message);
+    setMessage(e.target.value);
   };
   function validateThenSend() {
     if (messageInvalid === false) {
@@ -23,12 +23,12 @@ export default function(props) {
       .post("https://localhost:7214/api/Messages", {
         sender: senderId,
         queueId: queueId,
-        message: message,
+        mess: message,
       })
-      .then(function(response) {
-        console.log(response);
+      .then(function (response) {
+        console.log(response.data);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   };
