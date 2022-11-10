@@ -27,15 +27,13 @@ export default function (props) {
     });
   };
   const validateThenLogin = () => {
-    if (!usernameInvalid && !passwordInvalid) {
-      if (!register) {
+    if (!register) {
+      authUser(values.username, values.password);
+    } else if (register && !secondPasswordInvalid) {
+      if (values.password === values.password2) {
         authUser(values.username, values.password);
-      } else if (register && !secondPasswordInvalid) {
-        if (values.password === values.password2) {
-          authUser(values.username, values.password);
-        } else if (values.password === values.password2) {
-          setAuthError("Passwords are not matching");
-        }
+      } else if (values.password === values.password2) {
+        setAuthError("Passwords are not matching");
       }
     }
   };
@@ -49,9 +47,9 @@ export default function (props) {
         .then(function (response) {
           props.setAccount(response.data);
           props.setLogged();
-          props.setSelectedChat(response.data.chats[0]);
+          //props.setSelectedChat(response.data.chats[0]);
           console.log(response.data);
-          navigate("/Test");
+          navigate("/test/" + response.data.chats[0].idChat);
         })
         .catch(function (error) {
           setAuthError("User already exist");
@@ -66,8 +64,8 @@ export default function (props) {
         .then(function (response) {
           props.setAccount(response.data);
           props.setLogged();
-          props.setSelectedChat(response.data.chats[0]);
-          navigate("/Test");
+          //props.setSelectedChat(response.data.chats[0]);
+          navigate("/test/" + response.data.chats[0].idChat);
         })
         .catch(function (error) {
           setAuthError("Unable to login");
@@ -152,7 +150,7 @@ export default function (props) {
             {getSecondPassword()}
             {getButton("Register")}
           </Form>
-          <p1 onClick={toggleRegister}>Already have account?</p1>
+          <p onClick={toggleRegister}>Already have account?</p>
           <ErrorMessage justDisplay={true} authError={authError} />
         </div>
       ) : (
@@ -161,7 +159,7 @@ export default function (props) {
             {getLoginForm()}
             {getButton("Login")}
           </Form>
-          <p1 onClick={toggleRegister}>Dont have account?</p1>
+          <p onClick={toggleRegister}>Dont have account?</p>
           <ErrorMessage justDisplay={true} authError={authError} />
         </div>
       )}

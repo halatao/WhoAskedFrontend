@@ -14,9 +14,7 @@ export default function (props) {
     setMessage(e.target.value);
   };
   function validateThenSend() {
-    if (messageInvalid === false) {
       sendMessage(props.senderId, props.queueId, message);
-    }
   }
   const sendMessage = (senderId, queueId, message) => {
     axios
@@ -27,6 +25,7 @@ export default function (props) {
       })
       .then(function (response) {
         console.log(response.data);
+        props.refetch()
       })
       .catch(function (error) {
         console.log(error);
