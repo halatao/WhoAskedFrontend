@@ -1,6 +1,7 @@
 import React from "react";
 import LoginRedirect from "./LoginRedirect";
 import RightPanel from "./RightPanel";
+import LeftPanel from "./LeftPanel";
 //import { Col, Container, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -12,31 +13,29 @@ export default function (props) {
   }
   return (
     <div>
-      <Container>
-        <Row>
-          <Col>
-            <RightPanel
-              refetch={props.refetch}
-              account={props.account}
-              logged={props.logged}
-              selectedChat={props.selectedChat}
-              setSelectedChat={props.setSelectedChat}
-              messages={props.messages}
-            />
-          </Col>
+      <div className="wrapper">
+        <div className="first">
+          <LeftPanel
+            refetch={props.refetch}
+            account={props.account}
+            logged={props.logged}
+            selectedChat={props.selectedChat}
+            setSelectedChat={props.setSelectedChat}
+            messages={props.messages}
+          />
+        </div>
 
-          <Col>
-            <RightPanel
-              refetch={props.refetch}
-              account={props.account}
-              logged={props.logged}
-              selectedChat={props.selectedChat}
-              setSelectedChat={props.setSelectedChat}
-              messages={props.messages}
-            />
-          </Col>
-        </Row>
-      </Container>
+        <div className="second">
+          <RightPanel
+            refetch={props.refetch}
+            account={props.account}
+            logged={props.logged}
+            selectedChat={props.selectedChat}
+            setSelectedChat={props.setSelectedChat}
+            messages={props.messages}
+          />
+        </div>
+      </div>
     </div>
   );
 }

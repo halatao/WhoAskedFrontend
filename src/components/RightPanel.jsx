@@ -5,39 +5,26 @@ import LoginRedirect from "./LoginRedirect";
 import MessageSend from "./MessageSend";
 import MessagesWindow from "./MessagesWindow";
 export default function (props) {
-
-  if (!props.logged) {
-    return <LoginRedirect />;
-  }
-
   return (
     <div>
-      <Container>
-        <Col>
-          {props.account.chats.map((chat, index) => (
-            <div key={index} onClick={props.setSelectedChat(chat)}>
-              <Col>
-                <div>User:{chat.users[1].username}</div>
-                <div>Status:{chat.users[1].status}</div>
-                <div>Last message:{chat.lastMessage}</div>
-              </Col>
-            </div>
-          ))}
-        </Col>
+      <div className="rightPanelUpper">User:</div>
+      <div className="rightPanelMid">
+        <Row>
+          <Col>
+            <MessagesWindow messages={props.messages}></MessagesWindow>
+          </Col>
 
-        <br />
-
-        <Col>
-          <MessagesWindow messages={props.messages}></MessagesWindow>
-        </Col>
-        <Col>
-          <MessageSend
-            refetch={props.refetch}
-            queueId={props.selectedChat.idChat}
-            senderId={props.account.idUser}
-          />
-        </Col>
-      </Container>
+          <div className="rightPanelLower">
+            <Col>
+              <MessageSend
+                refetch={props.refetch}
+                queueId={props.selectedChat.idChat}
+                senderId={props.account.idUser}
+              />
+            </Col>
+          </div>
+        </Row>
+      </div>
     </div>
   );
 }
