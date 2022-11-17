@@ -4,7 +4,11 @@ export default function (props) {
   return (
     <div>
       {props.messages.map((message, index) => (
-        <div key={index}>{message.mess}</div>
+        <div key={index}>
+          <div>{message.sender}</div>
+        <div >{message.mess}</div>
+
+        </div>
       ))}
     </div>
   );

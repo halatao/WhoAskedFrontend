@@ -6,24 +6,19 @@ import MessageSend from "./MessageSend";
 import MessagesWindow from "./MessagesWindow";
 export default function (props) {
   return (
-    <div>
+    <div className="second">
       <div className="rightPanelUpper">User:</div>
       <div className="rightPanelMid">
-        <Row>
-          <Col>
-            <MessagesWindow messages={props.messages}></MessagesWindow>
-          </Col>
-
-          <div className="rightPanelLower">
-            <Col>
-              <MessageSend
-                refetch={props.refetch}
-                queueId={props.selectedChat.idChat}
-                senderId={props.account.idUser}
-              />
-            </Col>
-          </div>
-        </Row>
+        <MessagesWindow messages={props.messages}></MessagesWindow>
+      </div>
+      <div className="rightPanelLower">
+        <Col>
+          <MessageSend
+            refetch={props.refetch}
+            queueId={props.selectedChat.idChat}
+            senderId={props.account.idUser}
+          />
+        </Col>
       </div>
     </div>
   );

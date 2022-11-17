@@ -32,7 +32,7 @@ export default function (props) {
       });
   };
   return (
-    <div>
+    <div className="messLower">
       <FormInput
         Name="message"
         Type="text"
@@ -41,7 +41,10 @@ export default function (props) {
         value={message}
         handleInputChange={handleInputChange}
       />
+    
+      <div className="messageButton">
       <Button onClick={validateThenSend}>Send</Button>
+      </div>
     </div>
   );
 }

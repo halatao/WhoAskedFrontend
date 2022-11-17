@@ -6,7 +6,7 @@ import MessageSend from "./MessageSend";
 import MessagesWindow from "./MessagesWindow";
 export default function (props) {
   return (
-    <div>
+    <div className="first">
       <div className="leftPanelUpper">vrchni cast</div>
       <div className="leftPanelMid">
         <Container>

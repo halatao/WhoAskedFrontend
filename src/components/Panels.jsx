@@ -14,7 +14,7 @@ export default function (props) {
   return (
     <div>
       <div className="wrapper">
-        <div className="first">
+        
           <LeftPanel
             refetch={props.refetch}
             account={props.account}
@@ -23,9 +23,9 @@ export default function (props) {
             setSelectedChat={props.setSelectedChat}
             messages={props.messages}
           />
-        </div>
+        
 
-        <div className="second">
+        
           <RightPanel
             refetch={props.refetch}
             account={props.account}
@@ -34,7 +34,7 @@ export default function (props) {
             setSelectedChat={props.setSelectedChat}
             messages={props.messages}
           />
-        </div>
+        
       </div>
     </div>
   );
