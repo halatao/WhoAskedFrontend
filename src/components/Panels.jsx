@@ -17,7 +17,7 @@ export default function (props) {
   const selectedChat = account?.chats?.find((i) => i.idChat == params.id);
 
   function fetchMessages() {
-    debugger;
+    //debugger;
     if (!selectedChat) {
       return;
     }

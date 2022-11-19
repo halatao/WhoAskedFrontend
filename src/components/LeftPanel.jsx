@@ -18,7 +18,7 @@ export default function (props) {
                   onClick={() => props.setSelectedChat(chat.idChat)}
                 >
                   <div className="friendListItem">
-                    <div>{chat.users[1].username}</div>
+                    <div>{chat.users[0].username}</div>
                     <div className="friendListLastMes">{chat.lastMessage}</div>
                   </div>
                 </div>
