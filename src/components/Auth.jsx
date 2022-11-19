@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -37,6 +37,29 @@ export default function (props) {
       }
     }
   };
+
+  function login({ username, password }) {
+    axios
+      .post("https://localhost:7214/api/Users/LoginUser", {
+        username: username,
+        password: password,
+      })
+      .then(function (response) {
+        props.setAccount(response.data);
+        props.setLogged();
+        //props.setSelectedChat(response.data.chats[0]);
+        navigate("/test/" + response.data.chats[0].idChat);
+      })
+      .catch(function (error) {
+        setAuthError("Unable to login");
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    login({ username: "grolux", password: "grolux" });
+  }, []);
+
   const authUser = (user, pass) => {
     if (register) {
       axios
@@ -56,21 +79,7 @@ export default function (props) {
           console.log(error);
         });
     } else {
-      axios
-        .post("https://localhost:7214/api/Users/LoginUser", {
-          username: user,
-          password: pass,
-        })
-        .then(function (response) {
-          props.setAccount(response.data);
-          props.setLogged();
-          //props.setSelectedChat(response.data.chats[0]);
-          navigate("/test/" + response.data.chats[0].idChat);
-        })
-        .catch(function (error) {
-          setAuthError("Unable to login");
-          console.log(error);
-        });
+      login({ username: user, password: pass });
     }
   };
 

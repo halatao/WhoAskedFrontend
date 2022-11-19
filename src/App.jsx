@@ -2,29 +2,36 @@ import { useState, useEffect } from "react";
 import React from "react";
 import "./App.css";
 import Auth from "./components/Auth";
-import Test from "./components/Test";
 import LoginRedirect from "./components/LoginRedirect";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import axios from "axios";
 import Panels from "./components/Panels";
-import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function App() {
-  const [account, setAcc] = useState([]);
-  const [loadedChat, setLoadedChat] = useState([]);
-  const [messages, setMessages] = useState([]);
+  const [account, setAcc] = useState({});
   const [logged, setLogg] = useState(false);
   const [error] = useState("required");
   const [notError] = useState("");
-
-  const [selectedChat, setSelectedChat] = useState({});
-  const params = useParams();
+  function login({ username, password }) {
+    axios
+      .post("https://localhost:7214/api/Users/LoginUser", {
+        username: username,
+        password: password,
+      })
+      .then(function (response) {
+        console.log(response);
+        setAcc(response.data);
+        setLogg(true);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   useEffect(() => {
-    const chat =
-      account?.chats?.find((i) => i.id == params.id) ?? account.chats?.[0];
-    setSelectedChat(chat);
-  }, [params.id]);
+    // TODO COOKIE
+    login({ username: "grolux", password: "grolux" });
+  }, []);
 
   function setAccount(param) {
     setAcc(param);
@@ -33,32 +40,6 @@ function App() {
   function setLogged() {
     setLogg(true);
   }
-
-  /*function setSelectedChat(param) {
-    if (typeof loadedChat === undefined) {
-      setLoadedChat(param);
-      setChat(param);
-    } else {
-      setChat(param);
-      fetchMessages();
-    }
-  }*/
-
-  function fetchMessages() {
-    if (!selectedChat) {
-      return;
-    }
-    axios
-      .get("https://localhost:7214/api/Messages/" + selectedChat.idChat + "/10")
-      .then((response) => {
-        setMessages(response.data);
-        setLoadedChat(selectedChat);
-      });
-  }
-
-  useEffect(() => {
-    fetchMessages();
-  }, [selectedChat]);
 
   return (
     <body>
@@ -77,20 +58,10 @@ function App() {
           />
           <Route
             path="/test/:id"
-            element={
-              <Panels
-                refetch={() => {
-                  fetchMessages();
-                }}
-                account={account}
-                logged={logged}
-                setSelectedChat={setSelectedChat}
-                selectedChat={selectedChat}
-                messages={messages}
-              />
-            }
+            element={<Panels account={account} logged={logged} />}
           />
-          <Route path="/" element={<LoginRedirect />} />
+          {/*<Route path="/" element={<LoginRedirect />} />*/}
+          <Route path="/" element={<Navigate to={"/test/:id"}></Navigate>} />
         </Routes>
       </BrowserRouter>
     </body>

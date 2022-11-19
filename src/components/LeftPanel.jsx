@@ -12,8 +12,11 @@ export default function (props) {
         <Container>
           <Row>
             <Col>
-              {props.account.chats.map((chat, index) => (
-                <div key={index} onClick={props.setSelectedChat(chat)}>
+              {props.account?.chats?.map((chat, index) => (
+                <div
+                  key={index}
+                  onClick={() => props.setSelectedChat(chat.idChat)}
+                >
                   <div className="friendListItem">
                     <div>{chat.users[1].username}</div>
                     <div className="friendListLastMes">{chat.lastMessage}</div>

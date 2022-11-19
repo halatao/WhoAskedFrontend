@@ -38,7 +38,7 @@ export default function (props) {
         Type="text"
         Placeholder="Enter a message"
         setInvalid={setMessageInvalid}
-        value={message}
+        value={message} 
         handleInputChange={handleInputChange}
       />
     

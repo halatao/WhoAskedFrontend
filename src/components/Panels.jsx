@@ -1,40 +1,61 @@
-import React from "react";
-import LoginRedirect from "./LoginRedirect";
+import React, { useEffect, useState } from "react";
 import RightPanel from "./RightPanel";
 import LeftPanel from "./LeftPanel";
-//import { Col, Container, Row } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function (props) {
-  if (!props.logged) {
-    return <LoginRedirect />;
+  const [messages, setMessages] = useState([]);
+  const params = useParams();
+  const navigate = useNavigate();
+
+  function setSelectedChat(id) {
+    navigate("/test/" + id, { replace: true });
   }
+
+  const account = props.account;
+  const selectedChat = account?.chats?.find((i) => i.idChat == params.id);
+
+  function fetchMessages() {
+    debugger;
+    if (!selectedChat) {
+      return;
+    }
+    axios
+      .get("https://localhost:7214/api/Messages/" + selectedChat.idChat + "/10")
+      .then((response) => {
+        setMessages(response.data);
+      });
+  }
+
+  useEffect(() => {
+    fetchMessages();
+  }, [selectedChat]);
+
+  function refetch() {
+    fetchMessages();
+  }
+
   return (
     <div>
       <div className="wrapper">
-        
-          <LeftPanel
-            refetch={props.refetch}
-            account={props.account}
-            logged={props.logged}
-            selectedChat={props.selectedChat}
-            setSelectedChat={props.setSelectedChat}
-            messages={props.messages}
-          />
-        
+        <LeftPanel
+          refetch={refetch}
+          account={props.account}
+          logged={props.logged}
+          selectedChat={selectedChat}
+          setSelectedChat={setSelectedChat}
+          messages={messages}
+        />
 
-        
-          <RightPanel
-            refetch={props.refetch}
-            account={props.account}
-            logged={props.logged}
-            selectedChat={props.selectedChat}
-            setSelectedChat={props.setSelectedChat}
-            messages={props.messages}
-          />
-        
+        <RightPanel
+          refetch={refetch}
+          account={props.account}
+          logged={props.logged}
+          selectedChat={selectedChat}
+          setSelectedChat={setSelectedChat}
+          messages={messages}
+        />
       </div>
     </div>
   );
