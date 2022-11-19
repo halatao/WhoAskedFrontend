@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -27,18 +27,39 @@ export default function (props) {
     });
   };
   const validateThenLogin = () => {
-    if (!usernameInvalid && !passwordInvalid) {
-      if (!register) {
+    if (!register) {
+      authUser(values.username, values.password);
+    } else if (register && !secondPasswordInvalid) {
+      if (values.password === values.password2) {
         authUser(values.username, values.password);
-      } else if (register && !secondPasswordInvalid) {
-        if (values.password === values.password2) {
-          authUser(values.username, values.password);
-        } else if (values.password === values.password2) {
-          setAuthError("Passwords are not matching");
-        }
+      } else if (values.password === values.password2) {
+        setAuthError("Passwords are not matching");
       }
     }
   };
+
+  function login({ username, password }) {
+    axios
+      .post("https://localhost:7214/api/Users/LoginUser", {
+        username: username,
+        password: password,
+      })
+      .then(function (response) {
+        props.setAccount(response.data);
+        props.setLogged();
+        //props.setSelectedChat(response.data.chats[0]);
+        navigate("/test/" + response.data.chats[0].idChat);
+      })
+      .catch(function (error) {
+        setAuthError("Unable to login");
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    login({ username: "grolux", password: "grolux" });
+  }, []);
+
   const authUser = (user, pass) => {
     if (register) {
       axios
@@ -49,30 +70,16 @@ export default function (props) {
         .then(function (response) {
           props.setAccount(response.data);
           props.setLogged();
-          props.setSelectedChat(response.data.chats[0]);
+          //props.setSelectedChat(response.data.chats[0]);
           console.log(response.data);
-          navigate("/Test");
+          navigate("/test/" + response.data.chats[0].idChat);
         })
         .catch(function (error) {
           setAuthError("User already exist");
           console.log(error);
         });
     } else {
-      axios
-        .post("https://localhost:7214/api/Users/LoginUser", {
-          username: user,
-          password: pass,
-        })
-        .then(function (response) {
-          props.setAccount(response.data);
-          props.setLogged();
-          props.setSelectedChat(response.data.chats[0]);
-          navigate("/Test");
-        })
-        .catch(function (error) {
-          setAuthError("Unable to login");
-          console.log(error);
-        });
+      login({ username: user, password: pass });
     }
   };
 
@@ -152,7 +159,7 @@ export default function (props) {
             {getSecondPassword()}
             {getButton("Register")}
           </Form>
-          <p1 onClick={toggleRegister}>Already have account?</p1>
+          <p onClick={toggleRegister}>Already have account?</p>
           <ErrorMessage justDisplay={true} authError={authError} />
         </div>
       ) : (
@@ -161,7 +168,7 @@ export default function (props) {
             {getLoginForm()}
             {getButton("Login")}
           </Form>
-          <p1 onClick={toggleRegister}>Dont have account?</p1>
+          <p onClick={toggleRegister}>Dont have account?</p>
           <ErrorMessage justDisplay={true} authError={authError} />
         </div>
       )}

@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import ErrorMessage from "./ErrorMessage";
 export default function(props) {
   return (
-    <div>
+    <div className="messageInput">
       <Form.Group controlId={props.Name}>
         <Form.Label>{props.Label}</Form.Label>
         <Form.Control
@@ -13,7 +13,7 @@ export default function(props) {
           onChange={props.handleInputChange}
           value={props.value}
         />
-        <Form.Text className="text-muted">
+        <Form.Text className="text-muted w-100">
           <ErrorMessage
             text={props.value}
             setInvalid={props.setInvalid}
