@@ -1,32 +1,60 @@
 import React from "react";
 import { useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import LoginRedirect from "./LoginRedirect";
-import MessageSend from "./MessageSend";
-import MessagesWindow from "./MessagesWindow";
+import ChatList from "./ChatList";
+import FriendList from "./FriendList";
+
 export default function (props) {
+  const [mode, setMode] = useState("mess");
+
+  function canShowMessages() {
+    return mode === "mess";
+  }
+
+  const showMessages = canShowMessages();
+  const showFriends = mode === "friend";
+
   return (
     <div className="first">
-      <div className="leftPanelUpper">vrchni cast</div>
-      <div className="leftPanelMid">
-        <Container>
-          <Row>
-            <Col>
-              {props.account?.chats?.map((chat, index) => (
-                <div
-                  key={index}
-                  onClick={() => props.setSelectedChat(chat.idChat)}
-                >
-                  <div className="friendListItem">
-                    <div>{chat.users[0].username}</div>
-                    <div className="friendListLastMes">{chat.lastMessage}</div>
-                  </div>
-                </div>
-              ))}
-            </Col>
-          </Row>
-        </Container>
+      <div className="leftPanelUpper">
+        <button
+          onClick={() => {
+            setMode("friend");
+          }}
+        >
+          friend
+        </button>
+
+        <button
+          onClick={() => {
+            setMode("mess");
+          }}
+        >
+          messages
+        </button>
       </div>
+      <div className="leftPanelMid">
+        {showMessages ? (
+          <ChatList
+            refetch={props.refetch}
+            account={props.account}
+            logged={props.logged}
+            selectedChat={props.selectedChat}
+            setSelectedChat={props.setSelectedChat}
+            messages={props.messages}
+          />
+        ) : null}
+        {showFriends ? (
+          <FriendList
+            refetch={props.refetch}
+            account={props.account}
+            logged={props.logged}
+            selectedChat={props.selectedChat}
+            setSelectedChat={props.setSelectedChat}
+            messages={props.messages}
+          />
+        ) : null}
+      </div>
+
       <div className="leftPanelLower">
         <label>{props.account.username}</label>
         <br></br>

@@ -32,7 +32,7 @@ export default function (props) {
     } else if (register && !secondPasswordInvalid) {
       if (values.password === values.password2) {
         authUser(values.username, values.password);
-      } else if (values.password === values.password2) {
+      } else if (values.password == values.password2) {
         setAuthError("Passwords are not matching");
       }
     }

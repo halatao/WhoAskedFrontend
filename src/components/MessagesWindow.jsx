@@ -9,7 +9,9 @@ export default function (props) {
 
         return (
           <div key={index}>
-            <div>{sender?.username ?? ""}</div>
+            <div>
+              <b>{sender?.username ?? ""}</b>
+            </div>
             <div>{message.mess}</div>
           </div>
         );

@@ -35,13 +35,11 @@ export default function (props) {
         ></MessagesWindow>
       </div>
       <div className="rightPanelLower">
-        <Col>
-          <MessageSend
-            refetch={props.refetch}
-            queueId={props.selectedChat?.idChat}
-            senderId={props.account?.idUser}
-          />
-        </Col>
+        <MessageSend
+          refetch={props.refetch}
+          queueId={props.selectedChat?.idChat}
+          senderId={props.account?.idUser}
+        />
       </div>
     </div>
   );
