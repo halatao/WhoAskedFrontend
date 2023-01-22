@@ -37,7 +37,7 @@ export default function (props) {
   }
 
   return (
-    <div>
+    <div className="panels">
       <div className="wrapper">
         <LeftPanel
           refetch={refetch}
