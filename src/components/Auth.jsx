@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import FormInput from "./FormInput";
 import ErrorMessage from "./ErrorMessage";
+import UserService from "../services/UserService";
+import AuthService from "../services/AuthService";
 
 export default function (props) {
   const [register, setRegister] = useState(false);
@@ -18,6 +20,7 @@ export default function (props) {
   const [passwordInvalid, setPassInvalid] = useState(true);
   const [secondPasswordInvalid, setSecondPassInvalid] = useState(true);
   const [authError, setAuthError] = useState("");
+  const API_URL = "https://localhost:7129/api/Users";
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,6 +29,7 @@ export default function (props) {
       [name]: value,
     });
   };
+
   const validateThenLogin = () => {
     if (!register) {
       authUser(values.username, values.password);
@@ -38,27 +42,11 @@ export default function (props) {
     }
   };
 
-  function login({ username, password }) {
-    axios
-      .post("https://localhost:7214/api/Users/LoginUser", {
-        username: username,
-        password: password,
-      })
-      .then(function (response) {
-        props.setAccount(response.data);
-        props.setLogged();
-        //props.setSelectedChat(response.data.chats[0]);
-        navigate("/test/" + response.data.chats[0].idChat);
-      })
-      .catch(function (error) {
-        setAuthError("Unable to login");
-        console.log(error);
-      });
-  }
-
+  /*
   useEffect(() => {
     login({ username: "grolux", password: "grolux" });
   }, []);
+*/
 
   const authUser = (user, pass) => {
     if (register) {
@@ -68,18 +56,40 @@ export default function (props) {
           password: pass,
         })
         .then(function (response) {
-          props.setAccount(response.data);
           props.setLogged();
-          //props.setSelectedChat(response.data.chats[0]);
           console.log(response.data);
-          navigate("/test/" + response.data.chats[0].idChat);
+          navigate("/index/");
+          UserService.getUserBoard().then((res) => {
+            props.setAccount(res);
+            console.log(props.account);
+          });
         })
         .catch(function (error) {
           setAuthError("User already exist");
           console.log(error);
         });
     } else {
-      login({ username: user, password: pass });
+      axios
+        .post(API_URL + "/Login", { userName: user, password: pass })
+        .then((response) => {
+          if (response.data) {
+            localStorage.removeItem("jwt");
+            localStorage.removeItem("username");
+            localStorage.setItem("jwt", JSON.stringify(response.data));
+            localStorage.setItem("username", user);
+          }
+          console.log(response.data);
+          console.log(JSON.parse(localStorage.getItem("user")));
+
+          //UserService.getUserBoard().then((res) => {
+          //  props.setAccount(res.data);
+            navigate("/index/");
+          //});
+        })
+        .catch(function (error) {
+          setAuthError("Unable to login");
+          console.log(error);
+        });
     }
   };
 

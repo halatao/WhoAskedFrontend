@@ -6,41 +6,37 @@ import LoginRedirect from "./components/LoginRedirect";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Panels from "./components/Panels";
 import axios from "axios";
+import UserService from "./services/UserService";
+import authHeader from "./services/AuthHeader";
 
 function App() {
   const [account, setAcc] = useState({});
   const [logged, setLogg] = useState(false);
   const [error] = useState("required");
   const [notError] = useState("");
-  function login({ username, password }) {
-    axios
-      .post("https://localhost:7214/api/Users/LoginUser", {
-        username: username,
-        password: password,
-      })
-      .then(function (response) {
-        console.log(response);
-        setAcc(response.data);
-        setLogg(true);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
 
   useEffect(() => {
-    // TODO COOKIE
-    login({ username: "grolux", password: "grolux" });
+    let jwt = localStorage.getItem("jwt");
+    let username = localStorage.getItem("username");
+    const API_URL = "https://localhost:7129/api/Users/ByUsername?username=";
+    if (jwt && username) {
+      axios
+        .get(API_URL + localStorage.getItem("username"), {
+          headers: authHeader(),
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    }
   }, []);
+
+  function setLogged() {
+    setLogg(false);
+  }
 
   function setAccount(param) {
     setAcc(param);
   }
-
-  function setLogged() {
-    setLogg(true);
-  }
-
   return (
     <body>
       <BrowserRouter>
@@ -57,11 +53,12 @@ function App() {
             }
           />
           <Route
-            path="/test/:id"
+            path="/index"
             element={<Panels account={account} logged={logged} />}
           />
-          {/*<Route path="/" element={<LoginRedirect />} />*/}
-          <Route path="/" element={<Navigate to={"/test/:id"}></Navigate>} />
+
+          <Route path="/" element={<LoginRedirect />} />
+          {/* <Route path="/" element={<Navigate to={"/test/:id"}></Navigate>} /> */}
         </Routes>
       </BrowserRouter>
     </body>
