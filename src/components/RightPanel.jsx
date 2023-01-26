@@ -15,6 +15,7 @@ export default function (props) {
       </div>
       <div className="rightPanelMid">
         <MessagesWindow
+          account={props.account}
           allUsers={props.selectedChat.users}
           messages={props.messages}
         ></MessagesWindow>
