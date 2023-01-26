@@ -14,6 +14,10 @@ function App() {
   const [notError] = useState("");
 
   useEffect(() => {
+    refetch();
+  }, []);
+
+  function refetch() {
     let jwt = localStorage.getItem("jwt");
     let username = localStorage.getItem("username");
     console.log(username + jwt);
@@ -33,20 +37,20 @@ function App() {
         .catch((res) => {
           if (res.status == 401) {
             setLogout();
-            localStorage.removeItem("jwt");
-            localStorage.removeItem("username");
-            redirect("/login/");
           }
         });
     }
-  }, []);
+  }
 
   function setLogged() {
     setLogg(true);
   }
 
   function setLogout() {
+    localStorage.removeItem("jwt");
+    localStorage.removeItem("username");
     setLogg(false);
+    redirect("/login/");
   }
 
   function setAccount(param) {
@@ -70,7 +74,9 @@ function App() {
           />
           <Route
             path="/index"
-            element={<Panels account={account} logged={logged} />}
+            element={
+              <Panels account={account} logged={logged} setLogout={setLogout} />
+            }
           />
 
           <Route path="/" element={<LoginRedirect />} />

@@ -8,19 +8,13 @@ import axios from "axios";
 export default function (props) {
   const [allUsers, setAllUsers] = useState([]);
 
-  /**
-   * TODO filter na data co potřebujeme / jen uživatele se kterými jsem měl kdy chat
-   */
-
   useEffect(() => {}, []);
-
-  const selectedUser = allUsers?.find((i) =>
-    i.chats?.find((j) => j.idChat === props.selectedChat?.idChat)
-  );
 
   return (
     <div className="second">
-      <div className="rightPanelUpper">User: {selectedUser?.username}</div>
+      <div className="rightPanelUpper">
+        User: {props.selectedUser?.queueName}
+      </div>
       <div className="rightPanelMid">
         <MessagesWindow
           allUsers={allUsers}

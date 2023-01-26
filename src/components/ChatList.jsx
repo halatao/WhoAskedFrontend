@@ -8,7 +8,6 @@ export default function (props) {
             <div>
               <b>{queue.queueName}</b>
             </div>
-            {console.log(queue)}
             <div className="friendListLastMes">{queue.latestMessage}</div>
           </div>
         </div>

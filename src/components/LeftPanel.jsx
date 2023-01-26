@@ -38,6 +38,7 @@ export default function (props) {
 
       <div className="leftPanelLower">
         <label>#avatar# {props.account.userName}</label>
+        <button onClick={props.setLogout}>Logout</button>
       </div>
     </div>
   );
