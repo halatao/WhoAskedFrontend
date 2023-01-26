@@ -89,7 +89,7 @@ export default function (props) {
       <div className="leftPanelLower">
         <FontAwesomeIcon icon={props.account?.avatar} size="xl" />
         <label>{props.account.userName}</label>
-        <button onClick={props.setLogout}>Logout</button>
+
         <button
           onClick={() => {
             setMode("Settings");
@@ -97,6 +97,8 @@ export default function (props) {
         >
           Settings
         </button>
+
+        <button onClick={props.setLogout}>Logout</button>
       </div>
     </div>
   );
