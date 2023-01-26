@@ -2,6 +2,47 @@ import React from "react";
 import { useState } from "react";
 import ChatList from "./ChatList";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUser,
+  faLaptop,
+  faUserSecret,
+  faWheelchair,
+  faRobot,
+  faUserTie,
+  faUserAstronaut,
+  faUserNurse,
+  faUserNinja,
+  faUserInjured,
+  faUserGraduate,
+  faPoo,
+  faFaceSmile,
+  faSkull,
+  faFaceFrown,
+  faShieldHalved,
+} from "@fortawesome/free-solid-svg-icons";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import Settings from "./Settings";
+library.add(
+  faUser,
+  faShieldHalved,
+  faLaptop,
+  faUserSecret,
+  faWheelchair,
+  faRobot,
+  faUserTie,
+  faUserAstronaut,
+  faUserNurse,
+  faUserNinja,
+  faUserInjured,
+  faUserGraduate,
+  faPoo,
+  faFaceSmile,
+  faSkull,
+  faFaceFrown
+);
+
 export default function (props) {
   const [mode, setMode] = useState("mess");
 
@@ -10,7 +51,7 @@ export default function (props) {
   }
 
   const showMessages = canShowMessages();
-  const showFriends = mode === "friend";
+  const showSettings = mode === "Settings";
 
   return (
     <div className="first">
@@ -34,10 +75,29 @@ export default function (props) {
             messages={props.messages}
           />
         ) : null}
+
+        {showSettings ? (
+          <Settings
+            refetch={props.refetch}
+            account={props.account}
+            logged={props.logged}
+            selectedChat={props.selectedChat}
+            setSelectedChat={props.setSelectedChat}
+            messages={props.messages}
+          />
+        ) : null}
       </div>
 
       <div className="leftPanelLower">
-        <label>#avatar# {props.account.userName}</label>
+        <FontAwesomeIcon icon={props.account?.avatar} size="xl" />
+        <label>{props.account.userName}</label>
+        <button
+          onClick={() => {
+            setMode("Settings");
+          }}
+        >
+          Settings
+        </button>
       </div>
     </div>
   );
