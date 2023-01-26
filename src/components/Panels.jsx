@@ -3,6 +3,7 @@ import RightPanel from "./RightPanel";
 import LeftPanel from "./LeftPanel";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import LoginRedirect from "./LoginRedirect";
 
 export default function (props) {
   const [messages, setMessages] = useState([]);
@@ -14,7 +15,7 @@ export default function (props) {
   }
 
   const account = props.account;
-  const selectedChat = account?.chats?.find((i) => i.idChat == params.id);
+  const selectedChat = account?.queues?.find((i) => i.queueId == params.id);
 
   function fetchMessages() {
     //debugger;
@@ -35,28 +36,31 @@ export default function (props) {
   function refetch() {
     fetchMessages();
   }
+  if (props.logged) {
+    return (
+      <div className="panels">
+        <div className="wrapper">
+          <LeftPanel
+            refetch={refetch}
+            account={props.account}
+            logged={props.logged}
+            selectedChat={selectedChat}
+            setSelectedChat={setSelectedChat}
+            messages={messages}
+          />
 
-  return (
-    <div className="panels">
-      <div className="wrapper">
-        <LeftPanel
-          refetch={refetch}
-          account={props.account}
-          logged={props.logged}
-          selectedChat={selectedChat}
-          setSelectedChat={setSelectedChat}
-          messages={messages}
-        />
-
-        <RightPanel
-          refetch={refetch}
-          account={props.account}
-          logged={props.logged}
-          selectedChat={selectedChat}
-          setSelectedChat={setSelectedChat}
-          messages={messages}
-        />
+          <RightPanel
+            refetch={refetch}
+            account={props.account}
+            logged={props.logged}
+            selectedChat={selectedChat}
+            setSelectedChat={setSelectedChat}
+            messages={messages}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return <LoginRedirect />;
+  }
 }

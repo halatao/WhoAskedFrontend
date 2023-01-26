@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import { redirect, useNavigate, Navigate } from "react-router-dom";
 import FormInput from "./FormInput";
 import ErrorMessage from "./ErrorMessage";
-import UserService from "../services/UserService";
-import AuthService from "../services/AuthService";
+import { useEffect } from "react";
+import authHeader from "../services/AuthHeader";
 
 export default function (props) {
   const [register, setRegister] = useState(false);
@@ -42,12 +42,6 @@ export default function (props) {
     }
   };
 
-  /*
-  useEffect(() => {
-    login({ username: "grolux", password: "grolux" });
-  }, []);
-*/
-
   const authUser = (user, pass) => {
     if (register) {
       axios
@@ -78,13 +72,7 @@ export default function (props) {
             localStorage.setItem("jwt", JSON.stringify(response.data));
             localStorage.setItem("username", user);
           }
-          console.log(response.data);
-          console.log(JSON.parse(localStorage.getItem("user")));
-
-          //UserService.getUserBoard().then((res) => {
-          //  props.setAccount(res.data);
-            navigate("/index/");
-          //});
+          navigate("/index/");
         })
         .catch(function (error) {
           setAuthError("Unable to login");
@@ -160,28 +148,32 @@ export default function (props) {
     );
   }
 
-  return (
-    <div>
-      {register ? (
-        <div>
-          <Form>
-            {getLoginForm()}
-            {getSecondPassword()}
-            {getButton("Register")}
-          </Form>
-          <p onClick={toggleRegister}>Already have account?</p>
-          <ErrorMessage justDisplay={true} authError={authError} />
-        </div>
-      ) : (
-        <div>
-          <Form>
-            {getLoginForm()}
-            {getButton("Login")}
-          </Form>
-          <p onClick={toggleRegister}>Dont have account?</p>
-          <ErrorMessage justDisplay={true} authError={authError} />
-        </div>
-      )}
-    </div>
-  );
+  if (props.logged) {
+    return <Navigate to={"/index"} />;
+  } else {
+    return (
+      <div>
+        {register ? (
+          <div>
+            <Form>
+              {getLoginForm()}
+              {getSecondPassword()}
+              {getButton("Register")}
+            </Form>
+            <p onClick={toggleRegister}>Already have account?</p>
+            <ErrorMessage justDisplay={true} authError={authError} />
+          </div>
+        ) : (
+          <div>
+            <Form>
+              {getLoginForm()}
+              {getButton("Login")}
+            </Form>
+            <p onClick={toggleRegister}>Dont have account?</p>
+            <ErrorMessage justDisplay={true} authError={authError} />
+          </div>
+        )}
+      </div>
+    );
+  }
 }

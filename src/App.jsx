@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
-import React from "react";
 import "./App.css";
 import Auth from "./components/Auth";
 import LoginRedirect from "./components/LoginRedirect";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, redirect } from "react-router-dom";
 import Panels from "./components/Panels";
 import axios from "axios";
-import UserService from "./services/UserService";
 import authHeader from "./services/AuthHeader";
 
 function App() {
@@ -16,25 +14,47 @@ function App() {
   const [notError] = useState("");
 
   useEffect(() => {
+    console.log("app");
     let jwt = localStorage.getItem("jwt");
     let username = localStorage.getItem("username");
+    console.log(username + jwt);
     const API_URL = "https://localhost:7129/api/Users/ByUsername?username=";
-    if (jwt && username) {
+    if (jwt != "" && username != "") {
       axios
-        .get(API_URL + localStorage.getItem("username"), {
+        .get(API_URL + username, {
           headers: authHeader(),
         })
         .then((res) => {
-          console.log(res);
+          console.log("passed");
+          console.log(res.data);
+          setAcc(res.data);
+          console.log(account);
+          setAccount(res.data);
+          console.log(account);
+          setLogged();
+          redirect("/index/");
+        })
+        .catch((res) => {
+          if (res.status == 401) {
+            setLogout();
+            localStorage.removeItem("jwt");
+            localStorage.removeItem("username");
+            redirect("/login/");
+          }
         });
     }
   }, []);
 
   function setLogged() {
+    setLogg(true);
+  }
+
+  function setLogout() {
     setLogg(false);
   }
 
   function setAccount(param) {
+    console.log(param);
     setAcc(param);
   }
   return (
@@ -45,10 +65,11 @@ function App() {
             path="/login"
             element={
               <Auth
-                setAccount={setAccount}
-                setLogged={setLogged}
+                setAccount={setAcc}
+                setLogged={setLogg}
                 error={error}
                 notError={notError}
+                logged={logged}
               />
             }
           />
@@ -58,7 +79,6 @@ function App() {
           />
 
           <Route path="/" element={<LoginRedirect />} />
-          {/* <Route path="/" element={<Navigate to={"/test/:id"}></Navigate>} /> */}
         </Routes>
       </BrowserRouter>
     </body>

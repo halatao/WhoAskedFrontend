@@ -6,14 +6,14 @@ export default function (props) {
   return (
     <div>
       <h3>Chatlist</h3>
-      {props.account?.chats?.map((chat, index) => (
-        <div key={index} onClick={() => props.setSelectedChat(chat.idChat)}>
+      {props.account?.queues?.map((queue, index) => (
+        <div key={index} onClick={() => props.setSelectedChat(queue.queueId)}>
           <div className="friendListItem">
             <div>
-              <b>{chat.users[0].username}</b>
+              <b>{queue.queue.queueName}</b>
             </div>
-            {console.log(chat)}
-            <div className="friendListLastMes">{chat.lastMessage}</div>
+            {console.log(queue)}
+            <div className="friendListLastMes">{queue.queue.lastMessage}</div>
           </div>
         </div>
       ))}
