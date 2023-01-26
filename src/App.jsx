@@ -2,12 +2,20 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Auth from "./components/Auth";
 import LoginRedirect from "./components/LoginRedirect";
-import { BrowserRouter, Route, Routes, redirect } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  useNavigate,
+  Navigate,
+  redirect,
+} from "react-router-dom";
 import Panels from "./components/Panels";
 import axios from "axios";
 import authHeader from "./services/AuthHeader";
 
 function App() {
+  let navigate = useNavigate();
   const [account, setAcc] = useState({});
   const [logged, setLogg] = useState(false);
   const [error] = useState("required");
@@ -15,7 +23,36 @@ function App() {
 
   useEffect(() => {
     refetch();
+    window.addEventListener("beforeunload", (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+      SetStatusOffline();
+    });
   }, []);
+
+  function SetStatusOffline() {
+    axios
+      .post(
+        "https://localhost:7129/api/Users/UserStatus?username=" +
+          localStorage.getItem("username") +
+          "&active=false",
+        { headers: authHeader() }
+      )
+      .then((res) => {
+        setLogout();
+      });
+  }
+
+  function SetStatusOnline() {
+    axios
+      .post(
+        "https://localhost:7129/api/Users/UserStatus?username=" +
+          localStorage.getItem("username") +
+          "&active=true",
+        { headers: authHeader() }
+      )
+      .then((res) => {});
+  }
 
   function refetch() {
     let jwt = localStorage.getItem("jwt");
@@ -32,6 +69,7 @@ function App() {
           console.log(account);
           if (!logged) {
             setLogged();
+            SetStatusOnline();
           }
         })
         .catch((res) => {
@@ -50,38 +88,38 @@ function App() {
     localStorage.removeItem("jwt");
     localStorage.removeItem("username");
     setLogg(false);
-    redirect("/login/");
+    navigate("/login");
   }
 
   function setAccount(param) {
     setAcc(param);
   }
+
   return (
     <body>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/login"
-            element={
-              <Auth
-                setAccount={setAcc}
-                setLogged={setLogg}
-                error={error}
-                notError={notError}
-                logged={logged}
-              />
-            }
-          />
-          <Route
-            path="/index"
-            element={
-              <Panels account={account} logged={logged} setLogout={setLogout} />
-            }
-          />
+      <Routes>
+        <Route
+          path="/login"
+          element={
+            <Auth
+              setAccount={setAcc}
+              setLogged={setLogg}
+              error={error}
+              notError={notError}
+              logged={logged}
+              refetch={refetch}
+            />
+          }
+        />
+        <Route
+          path="/index"
+          element={
+            <Panels account={account} logged={logged} setLogout={setLogout} />
+          }
+        />
 
-          <Route path="/" element={<LoginRedirect />} />
-        </Routes>
-      </BrowserRouter>
+        <Route path="/" element={<LoginRedirect />} />
+      </Routes>
     </body>
   );
 }

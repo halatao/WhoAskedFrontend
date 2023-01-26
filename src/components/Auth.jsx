@@ -71,6 +71,7 @@ export default function (props) {
             localStorage.removeItem("username");
             localStorage.setItem("jwt", JSON.stringify(response.data));
             localStorage.setItem("username", user);
+            props.refetch();
             navigate("/index/");
           }
         })
