@@ -11,15 +11,8 @@ export default function (props) {
   /**
    * TODO filter na data co potřebujeme / jen uživatele se kterými jsem měl kdy chat
    */
-  function fetchAllUsers() {
-    axios.get("https://localhost:7214/api/Users/").then((response) => {
-      setAllUsers(response.data);
-    });
-  }
 
-  useEffect(() => {
-    fetchAllUsers();
-  }, []);
+  useEffect(() => {}, []);
 
   const selectedUser = allUsers?.find((i) =>
     i.chats?.find((j) => j.idChat === props.selectedChat?.idChat)
