@@ -71,8 +71,8 @@ export default function (props) {
             localStorage.removeItem("username");
             localStorage.setItem("jwt", JSON.stringify(response.data));
             localStorage.setItem("username", user);
+            navigate("/index/");
           }
-          navigate("/index/");
         })
         .catch(function (error) {
           setAuthError("Unable to login");
@@ -148,32 +148,28 @@ export default function (props) {
     );
   }
 
-  if (props.logged) {
-    return <Navigate to={"/index"} />;
-  } else {
-    return (
-      <div>
-        {register ? (
-          <div>
-            <Form>
-              {getLoginForm()}
-              {getSecondPassword()}
-              {getButton("Register")}
-            </Form>
-            <p onClick={toggleRegister}>Already have account?</p>
-            <ErrorMessage justDisplay={true} authError={authError} />
-          </div>
-        ) : (
-          <div>
-            <Form>
-              {getLoginForm()}
-              {getButton("Login")}
-            </Form>
-            <p onClick={toggleRegister}>Dont have account?</p>
-            <ErrorMessage justDisplay={true} authError={authError} />
-          </div>
-        )}
-      </div>
-    );
-  }
+  return (
+    <div>
+      {register ? (
+        <div>
+          <Form>
+            {getLoginForm()}
+            {getSecondPassword()}
+            {getButton("Register")}
+          </Form>
+          <p onClick={toggleRegister}>Already have account?</p>
+          <ErrorMessage justDisplay={true} authError={authError} />
+        </div>
+      ) : (
+        <div>
+          <Form>
+            {getLoginForm()}
+            {getButton("Login")}
+          </Form>
+          <p onClick={toggleRegister}>Dont have account?</p>
+          <ErrorMessage justDisplay={true} authError={authError} />
+        </div>
+      )}
+    </div>
+  );
 }

@@ -14,7 +14,6 @@ function App() {
   const [notError] = useState("");
 
   useEffect(() => {
-    console.log("app");
     let jwt = localStorage.getItem("jwt");
     let username = localStorage.getItem("username");
     console.log(username + jwt);
@@ -25,14 +24,11 @@ function App() {
           headers: authHeader(),
         })
         .then((res) => {
-          console.log("passed");
-          console.log(res.data);
-          setAcc(res.data);
-          console.log(account);
           setAccount(res.data);
           console.log(account);
-          setLogged();
-          redirect("/index/");
+          if (!logged) {
+            setLogged();
+          }
         })
         .catch((res) => {
           if (res.status == 401) {
@@ -54,7 +50,6 @@ function App() {
   }
 
   function setAccount(param) {
-    console.log(param);
     setAcc(param);
   }
   return (

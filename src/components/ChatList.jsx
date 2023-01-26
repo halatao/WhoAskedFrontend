@@ -1,7 +1,3 @@
-import React from "react";
-import { useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import * as Console from "console";
 export default function (props) {
   return (
     <div>
@@ -10,10 +6,10 @@ export default function (props) {
         <div key={index} onClick={() => props.setSelectedChat(queue.queueId)}>
           <div className="friendListItem">
             <div>
-              <b>{queue.queue.queueName}</b>
+              <b>{queue.queueName}</b>
             </div>
             {console.log(queue)}
-            <div className="friendListLastMes">{queue.queue.lastMessage}</div>
+            <div className="friendListLastMes">{queue.latestMessage}</div>
           </div>
         </div>
       ))}
