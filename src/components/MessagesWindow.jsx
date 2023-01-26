@@ -5,12 +5,12 @@ export default function (props) {
   return (
     <div>
       {props.messages.map((message, index) => {
-        const sender = allUsers.find((i) => i.idUser == message.sender);
+        const sender = allUsers.find((i) => i.userId == message.sender);
 
         return (
           <div key={index}>
             <div>
-              <b>{sender?.username ?? ""}</b>
+              <b>{sender?.userName ?? ""}</b>
             </div>
             <div>{message.mess}</div>
           </div>

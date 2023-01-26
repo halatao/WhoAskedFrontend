@@ -6,8 +6,6 @@ import MessagesWindow from "./MessagesWindow";
 import axios from "axios";
 
 export default function (props) {
-  const [allUsers, setAllUsers] = useState([]);
-
   useEffect(() => {}, []);
 
   return (
@@ -17,15 +15,15 @@ export default function (props) {
       </div>
       <div className="rightPanelMid">
         <MessagesWindow
-          allUsers={allUsers}
+          allUsers={props.selectedChat.users}
           messages={props.messages}
         ></MessagesWindow>
       </div>
       <div className="rightPanelLower">
         <MessageSend
           refetch={props.refetch}
-          queueId={props.selectedChat?.idChat}
-          senderId={props.account?.idUser}
+          queueId={props.selectedChat?.queueId}
+          senderId={props.account?.userId}
         />
       </div>
     </div>

@@ -10,7 +10,7 @@ export default function (props) {
   const [selectedChat, setChat] = useState([]);
 
   function setSelectedChat(id) {
-    let chat = props.account.queues.find(i => i.queueId == id);
+    let chat = props.account.queues.find((i) => i.queueId == id);
     setChat(chat);
     fetchMessages();
   }
@@ -27,6 +27,7 @@ export default function (props) {
 
   useEffect(() => {
     fetchMessages();
+    console.log(selectedChat);
   }, [selectedChat]);
 
   function refetch() {

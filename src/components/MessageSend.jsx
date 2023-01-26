@@ -14,18 +14,19 @@ export default function (props) {
     setMessage(e.target.value);
   };
   function validateThenSend() {
-      sendMessage(props.senderId, props.queueId, message);
+    sendMessage(props.senderId, props.queueId, message);
   }
   const sendMessage = (senderId, queueId, message) => {
     axios
-      .post("https://localhost:7214/api/Messages", {
+      .post("https://localhost:7129/api/Messages", {
         sender: senderId,
         queueId: queueId,
         mess: message,
+        sent: "2023-01-26T15:53:20.083",
       })
       .then(function (response) {
         console.log(response.data);
-        props.refetch()
+        props.refetch();
       })
       .catch(function (error) {
         console.log(error);
@@ -38,12 +39,12 @@ export default function (props) {
         Type="text"
         Placeholder="Enter a message"
         setInvalid={setMessageInvalid}
-        value={message} 
+        value={message}
         handleInputChange={handleInputChange}
       />
-    
+
       <div className="messageButton">
-      <Button onClick={validateThenSend}>Send</Button>
+        <Button onClick={validateThenSend}>Send</Button>
       </div>
     </div>
   );
