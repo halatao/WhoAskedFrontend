@@ -65,6 +65,7 @@ export default function (props) {
       <div className="leftPanelMid">
         {showMessages ? (
           <ChatList
+            setRightPanelMode={props.setRightPanelMode}
             refetch={props.refetch}
             account={props.account}
             logged={props.logged}
