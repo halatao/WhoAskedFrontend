@@ -8,6 +8,7 @@ import LoginRedirect from "./LoginRedirect";
 export default function (props) {
   const [messages, setMessages] = useState([]);
   const [selectedChat, setChat] = useState([]);
+  const [rightPanelMode, setRightPanelMode] = useState("messWelcome");
 
   function setSelectedChat(id) {
     let chat = props.account.queues.find((i) => i.queueId == id);
@@ -37,6 +38,8 @@ export default function (props) {
     <div className="panels">
       <div className="wrapper">
         <LeftPanel
+          rightPanelMode={rightPanelMode}
+          setRightPanelMode={setRightPanelMode}
           refetch={refetch}
           account={props.account}
           logged={props.logged}
@@ -47,6 +50,8 @@ export default function (props) {
         />
 
         <RightPanel
+          rightPanelMode={rightPanelMode}
+          setRightPanelMode={setRightPanelMode}
           refetch={refetch}
           account={props.account}
           logged={props.logged}
