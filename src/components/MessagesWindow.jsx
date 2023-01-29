@@ -33,23 +33,19 @@ export default function (props) {
 }*/
 
 import { useState } from "react";
-import { React, useEffect} from "react";
+import { React, useEffect } from "react";
 export default function (props) {
   const allUsers = props.allUsers;
   const loggedAcc = props.account.userName;
 
-  //useEffect(() => {
-   // let interval = setInterval(() => {
-   //   props.refetchMess();
-   // }, 5000);
-   // return () => {
-   //   clearInterval(interval);
-  //  };
- // }, []);
-
   useEffect(() => {
+    let interval = setInterval(() => {
       props.refetchMess();
-  }, []);
+    }, 3000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [props.refetchMess]);
 
   return (
     <div>

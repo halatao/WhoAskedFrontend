@@ -7,7 +7,7 @@ import LoginRedirect from "./LoginRedirect";
 
 export default function (props) {
   const [messages, setMessages] = useState([]);
-  const [selectedChat, setChat] = useState([]);
+  const [selectedChat, setChat] = useState({});
   const [rightPanelMode, setRightPanelMode] = useState("messWelcome");
 
   function setSelectedChat(id) {
@@ -26,7 +26,9 @@ export default function (props) {
       )
       .then((response) => {
         console.log(response.data[0].queueId);
+        console.log(selectedChat);
         setMessages(response.data);
+
       });
   }
 

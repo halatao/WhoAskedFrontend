@@ -24,11 +24,10 @@ export default function (props) {
           key={index}
           onClick={() => {
             props.setSelectedChat(queue.queueId);
-            props.refetchMess();
             props.setRightPanelMode("messWin");
           }}
         >
-          <ChatPreview queue={queue}/>
+          <ChatPreview queue={queue} />
         </div>
       ))}
     </div>
