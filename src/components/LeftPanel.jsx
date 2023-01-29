@@ -22,6 +22,7 @@ import {
   faShieldHalved,
 } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import { Route, Routes } from "react-router-dom";
 library.add(
   faUser,
   faShieldHalved,
@@ -48,9 +49,6 @@ export default function (props) {
     return mode === "mess";
   }
 
-  const showMessages = canShowMessages();
-  const showSettings = mode === "Settings";
-
   return (
     <div className="first">
       <div className="leftPanelUpper">
@@ -63,30 +61,33 @@ export default function (props) {
         </button>
       </div>
       <div className="leftPanelMid">
-        {showMessages ? (
-          <ChatList
-            setRightPanelMode={props.setRightPanelMode}
-            refetchMess={props.refetchMess}
-            refetchAcc={props.refetchAcc}
-            account={props.account}
-            logged={props.logged}
-            selectedChat={props.selectedChat}
-            setSelectedChat={props.setSelectedChat}
-            messages={props.messages}
+        <Routes>
+          <Route
+            index
+            element={
+              <ChatList
+                refetchMess={props.refetchMess}
+                refetchAcc={props.refetchAcc}
+                account={props.account}
+                logged={props.logged}
+                messages={props.messages}
+              />
+            }
           />
-        ) : null}
-
-        {showSettings ? (
-          <Settings
-            refetchMess={props.refetchMess}
-            refetchAcc={props.refetchAcc}
-            account={props.account}
-            logged={props.logged}
-            selectedChat={props.selectedChat}
-            setSelectedChat={props.setSelectedChat}
-            messages={props.messages}
+          <Route
+            path="settings"
+            element={
+              <Settings
+                refetchMess={props.refetchMess}
+                refetchAcc={props.refetchAcc}
+                account={props.account}
+                logged={props.logged}
+                messages={props.messages}
+              />
+            }
           />
-        ) : null}
+          <Route path="*" element={<div />} />
+        </Routes>
       </div>
 
       <div className="leftPanelLower">

@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import FormInput from "./FormInput";
 import { Button, Form } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 
 export default function (props) {
   const [selectedUser, setSelectedUser] = useState();
+  const { queueId } = useParams();
 
   const initialValues = {
     username: "",
@@ -21,11 +23,11 @@ export default function (props) {
   };
 
   const deleteUser = () => {
-    postDelete(selectedUser, props.selectedChat.queueId);
+    postDelete(selectedUser, queueId);
   };
 
   const addUser = () => {
-    postAdd(values.username, props.selectedChat.queueId);
+    postAdd(values.username, queueId);
   };
 
   const postDelete = (userId, queueId) => {
