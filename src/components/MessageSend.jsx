@@ -3,6 +3,7 @@ import FormInput from "./FormInput";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export default function (props) {
   const [message, setMessage] = useState("");
@@ -18,6 +19,7 @@ export default function (props) {
   };
   function validateThenSend() {
     sendMessage(props.senderId, queueId, message);
+    setMessage("")
   }
   const sendMessage = (senderId, queueId, message) => {
     axios
@@ -36,7 +38,15 @@ export default function (props) {
       });
   };
   return (
-    <div className="messLower">
+    <form
+      className="messLower"
+      action=""
+      onSubmit={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        validateThenSend();
+      }}
+    >
       <FormInput
         Name="message"
         Type="text"
@@ -47,8 +57,8 @@ export default function (props) {
       />
 
       <div className="messageButton">
-        <Button onClick={validateThenSend}>Send</Button>
+        <Button type="submit">Send</Button>
       </div>
-    </div>
+    </form>
   );
 }

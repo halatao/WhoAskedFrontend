@@ -9,6 +9,10 @@ export default function (props) {
   const [selectedUser, setSelectedUser] = useState();
   const { queueId } = useParams();
 
+  const queues = props.account?.queues ?? [];
+  const allUsers = queues?.find((i) => i.queueId.toString() === queueId) ?? [];
+  const users = allUsers.users;
+
   const initialValues = {
     username: "",
   };
@@ -77,7 +81,7 @@ export default function (props) {
       </Form>
       <h4>Delete user</h4>
       <div>
-        {props.selectedChat?.users?.map((users, index) => (
+        {users.map((users, index) => (
           <div key={index} onClick={() => setSelectedUser(users.userId)}>
             {users.userName}
           </div>

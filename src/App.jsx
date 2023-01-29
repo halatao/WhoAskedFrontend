@@ -23,11 +23,11 @@ function App() {
 
   useEffect(() => {
     refetch();
-    window.addEventListener("beforeunload", (event) => {
+   /* window.addEventListener("beforeunload", (event) => {
       event.preventDefault();
       event.returnValue = "";
       SetStatusOffline();
-    });
+    });*/
   }, []);
 
   function SetStatusOffline() {

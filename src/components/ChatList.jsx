@@ -22,7 +22,7 @@ export default function (props) {
       <h3>Chatlist</h3>
       {props.account?.queues?.map((queue, index) => (
         <Link
-            to={"index/" + queue.queueId}
+          to={"/index/" + queue.queueId}
           key={index}
         >
           <ChatPreview queue={queue} />

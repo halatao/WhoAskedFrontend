@@ -125,6 +125,8 @@ Form {
 
 .messLower {
   display: flex;
+  flex-direction: row;
+  gap: 1rem;
   height: 100%;
   align-items: start;
   padding-left: 10px;

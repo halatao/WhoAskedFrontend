@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { redirect, useNavigate, Navigate } from "react-router-dom";
 import FormInput from "./FormInput";
 import ErrorMessage from "./ErrorMessage";
-import { useEffect } from "react";
 import authHeader from "../services/AuthHeader";
 
 export default function (props) {
@@ -67,12 +66,10 @@ export default function (props) {
         .post(API_URL + "/Login", { userName: user, password: pass })
         .then((response) => {
           if (response.data) {
-            localStorage.removeItem("jwt");
-            localStorage.removeItem("username");
             localStorage.setItem("jwt", JSON.stringify(response.data));
             localStorage.setItem("username", user);
             props.refetch();
-            navigate("/index/");
+            navigate("/index/3");
           }
         })
         .catch(function (error) {
