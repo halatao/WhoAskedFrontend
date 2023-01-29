@@ -1,6 +1,7 @@
 import React from "react";
 import ChatPreview from "./ChatPreview";
 import { useEffect } from "react";
+import {Link} from "react-router-dom";
 
 export default function (props) {
   //useEffect(() => {
@@ -20,15 +21,12 @@ export default function (props) {
     <div>
       <h3>Chatlist</h3>
       {props.account?.queues?.map((queue, index) => (
-        <div
+        <Link
+            to={"index/" + queue.queueId}
           key={index}
-          onClick={() => {
-            props.setSelectedChat(queue.queueId);
-            props.setRightPanelMode("messWin");
-          }}
         >
           <ChatPreview queue={queue} />
-        </div>
+        </Link>
       ))}
     </div>
   );

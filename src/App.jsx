@@ -110,7 +110,7 @@ function App() {
           }
         />
         <Route
-          path="/index"
+          path="/index/:queueId"
           element={
             <Panels account={account} logged={logged} setLogout={setLogout} refetchAcc={refetch} />
           }

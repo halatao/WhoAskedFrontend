@@ -7,6 +7,9 @@ import axios from "axios";
 export default function (props) {
   const [message, setMessage] = useState("");
   const [messageInvalid, setMessInvalid] = useState(true);
+
+  const { queueId } = useParams();
+
   function setMessageInvalid(param) {
     setMessInvalid(param);
   }
@@ -14,7 +17,7 @@ export default function (props) {
     setMessage(e.target.value);
   };
   function validateThenSend() {
-    sendMessage(props.senderId, props.queueId, message);
+    sendMessage(props.senderId, queueId, message);
   }
   const sendMessage = (senderId, queueId, message) => {
     axios
