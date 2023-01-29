@@ -54,7 +54,7 @@ export default function (props) {
   useEffect(() => {
     let interval = setInterval(() => {
       props.refetchAcc();
-    }, 3000);
+    }, 5000);
     return () => {
       clearInterval(interval);
     };

@@ -16,7 +16,12 @@ export default function (props) {
   const [messages, setMessages] = useState([]);
   function fetchMessages(id) {
     axios
-      .get("https://localhost:7129/api/Messages/" + id + "/10?userId=" + 2)
+      .get(
+        "https://localhost:7129/api/Messages/" +
+          id +
+          "/10?userId=" +
+          props.account.userId
+      )
       .then((response) => {
         console.log(response.data[0].queueId);
         setMessages(response.data);
