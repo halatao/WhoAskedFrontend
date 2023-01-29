@@ -66,7 +66,8 @@ export default function (props) {
         {showMessages ? (
           <ChatList
             setRightPanelMode={props.setRightPanelMode}
-            refetch={props.refetch}
+            refetchMess={props.refetchMess}
+            refetchAcc={props.refetchAcc}
             account={props.account}
             logged={props.logged}
             selectedChat={props.selectedChat}
@@ -77,7 +78,8 @@ export default function (props) {
 
         {showSettings ? (
           <Settings
-            refetch={props.refetch}
+            refetchMess={props.refetchMess}
+            refetchAcc={props.refetchAcc}
             account={props.account}
             logged={props.logged}
             selectedChat={props.selectedChat}

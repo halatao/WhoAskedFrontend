@@ -17,6 +17,7 @@ export default function (props) {
       })
       .then(() => {
         setAvatar("user");
+        props.refetchAcc();
       })
       .catch((err) => {
         console.log(err);

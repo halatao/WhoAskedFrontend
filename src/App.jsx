@@ -57,7 +57,6 @@ function App() {
   function refetch() {
     let jwt = localStorage.getItem("jwt");
     let username = localStorage.getItem("username");
-    console.log(username + jwt);
     const API_URL = "https://localhost:7129/api/Users/ByUsername?username=";
     if (jwt != "" && username != "") {
       axios
@@ -66,7 +65,6 @@ function App() {
         })
         .then((res) => {
           setAccount(res.data);
-          console.log(account);
           if (!logged) {
             setLogged();
             SetStatusOnline();
@@ -114,7 +112,7 @@ function App() {
         <Route
           path="/index"
           element={
-            <Panels account={account} logged={logged} setLogout={setLogout} />
+            <Panels account={account} logged={logged} setLogout={setLogout} refetchAcc={refetch} />
           }
         />
 

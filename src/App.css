@@ -1,131 +1,138 @@
 body {
-    background-color: rebeccapurple;
+  background-color: rebeccapurple;
 }
 
-Form{
-    width: 25%;
+Form {
+  width: 25%;
 }
 
-
-.panels{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+.panels {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
-.mention{
-    color: blue;
+.mention {
+  color: blue;
 }
 
-.avatarParent{
-    display: flex;
-flex-wrap: wrap;
+.avatarParent {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.avatar{
-margin: 5px;
-    border: 3px solid transparent;
-    padding: 3px;
+.avatar {
+  margin: 5px;
+  border: 3px solid transparent;
+  padding: 3px;
 }
 
-.avatar:hover{
-    background: #e1e1e1;
-    border: 3px solid yellow;
+.avatar:hover {
+  background: #e1e1e1;
+  border: 3px solid yellow;
 }
 
-.avatar:focus{
-    background-color: yellow;
-    border: 3px solid black;
+.avatar:focus {
+  background-color: yellow;
+  border: 3px solid black;
 }
 
 .wrapper {
-    display: flex;
-    height: 85%;
-    width: 1500px;
+  display: flex;
+  height: 85%;
+  width: 1500px;
 }
 .first {
-    flex: 1;
-    border: 1px solid black;
-    position: relative;
-    height: 100%;
-max-width: 25%;
-    display: flex;
-    flex-direction: column;
+  flex: 1;
+  border: 1px solid black;
+  position: relative;
+  height: 100%;
+  max-width: 25%;
+  display: flex;
+  flex-direction: column;
 }
 .second {
-    flex: 1;
-    margin-left: 50px;
-    border: 1px solid black;
-    height: 100%;
+  flex: 1;
+  margin-left: 50px;
+  border: 1px solid black;
+  height: 100%;
 
-    max-height: 100%;
-    display: flex;
-    flex-direction: column;
-
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .leftPanelUpper {
-    background-color: yellow;
-    height: 6%;
+  background-color: yellow;
+  height: 6%;
 }
 
 .leftPanelMid {
-    background-color: White;
-    flex-grow: 2;
+  background-color: White;
+  flex-grow: 2;
 }
 
 .leftPanelLower {
-    background-color: yellow;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 6%;
+  background-color: yellow;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 6%;
 }
 
 .rightPanelUpper {
-    background-color: yellow;
-    height: 6%;
+  background-color: yellow;
+  height: 6%;
 }
 
 .rightPanelMid {
-    background-color: white;
-    overflow: auto;
-    flex-grow: 2;
+  background-color: white;
+  overflow: auto;
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .rightPanelLower {
-    background-color: white;
-    width: 100%;
-    height: 30px;
+  background-color: white;
+  width: 100%;
+  height: 30px;
 }
 
-.friendListItem{
-    margin-bottom: 5px;
+.friendListItem {
+  margin-bottom: 5px;
 }
 
-.friendListLastMes{
-    color: grey;
+.friendListLastMes {
+  color: grey;
 }
 
-.lol{
-    width: 100%;
+.lol {
+  width: 100%;
 }
 
-.messageInput{
-    flex: 2;
-width: 100%;
+.messageInput {
+  flex: 2;
+  width: 100%;
 }
 
-.messageButton{
-    flex: 1;
-    display: flex;
-    justify-content: center;
+.messageButton {
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
-.messLower{
-    display: flex;
-    height: 100%;
-    align-items: start;
-    padding-left: 10px;
+.messLower {
+  display: flex;
+  height: 100%;
+  align-items: start;
+  padding-left: 10px;
+}
+
+.notSeen {
+  background-color: whitesmoke;
+}
+.notSeenFont {
+  font-weight: 700;
 }

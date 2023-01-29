@@ -8,7 +8,6 @@ import ChatList from "./ChatList";
 import GroupSettings from "./GroupSettings";
 
 export default function (props) {
-  useEffect(() => {}, []);
   const showMessWindow = props.rightPanelMode === "messWin";
   const showSettWindow = props.rightPanelMode === "messSett";
   const showWelcomeWindow = props.rightPanelMode === "messWelcome";
@@ -32,6 +31,8 @@ export default function (props) {
             account={props.account}
             allUsers={props.selectedChat.users}
             messages={props.messages}
+            refetchMess={props.refetchMess}
+            refetchAcc={props.refetchAcc}
           />
         ) : null}
         {showSettWindow ? (
@@ -48,7 +49,8 @@ export default function (props) {
 
       <div className="rightPanelLower">
         <MessageSend
-          refetch={props.refetch}
+          refetchMess={props.refetchMess}
+          refetchAcc={props.refetchAcc}
           queueId={props.selectedChat?.queueId}
           senderId={props.account?.userId}
         />

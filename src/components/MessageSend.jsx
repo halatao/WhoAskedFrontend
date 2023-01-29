@@ -26,7 +26,7 @@ export default function (props) {
       })
       .then(function (response) {
         console.log(response.data);
-        props.refetch();
+        props.refetchMess();
       })
       .catch(function (error) {
         console.log(error);

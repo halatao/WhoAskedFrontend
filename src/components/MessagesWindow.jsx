@@ -32,20 +32,30 @@ export default function (props) {
   );
 }*/
 
-import React from "react";
-
+import { useState } from "react";
+import { React, useEffect} from "react";
 export default function (props) {
   const allUsers = props.allUsers;
   const loggedAcc = props.account.userName;
 
-  console.log(loggedAcc);
+  //useEffect(() => {
+   // let interval = setInterval(() => {
+   //   props.refetchMess();
+   // }, 5000);
+   // return () => {
+   //   clearInterval(interval);
+  //  };
+ // }, []);
+
+  useEffect(() => {
+      props.refetchMess();
+  }, []);
+
   return (
     <div>
       {props.messages.map((message, index) => {
         const sender = allUsers.find((i) => i.userId == message.sender);
         let symbol = message.mess.includes("@" + loggedAcc);
-        console.log(symbol);
-
         if (symbol) {
           return (
             <div key={index}>

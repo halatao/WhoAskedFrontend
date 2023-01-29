@@ -19,19 +19,18 @@ export default function (props) {
   function fetchMessages() {
     axios
       .get(
-        "https://localhost:7129/api/Messages/" + selectedChat.queueId + "/10"
+        "https://localhost:7129/api/Messages/" +
+          selectedChat.queueId +
+          "/10?userId=" +
+          props.account.userId
       )
       .then((response) => {
+        console.log(response.data[0].queueId);
         setMessages(response.data);
       });
   }
 
-  useEffect(() => {
-    fetchMessages();
-    console.log(selectedChat);
-  }, [selectedChat]);
-
-  function refetch() {
+  function refetchMess() {
     fetchMessages();
   }
   return (
@@ -40,7 +39,8 @@ export default function (props) {
         <LeftPanel
           rightPanelMode={rightPanelMode}
           setRightPanelMode={setRightPanelMode}
-          refetch={refetch}
+          refetchMess={refetchMess}
+          refetchAcc={props.refetchAcc}
           account={props.account}
           logged={props.logged}
           selectedChat={selectedChat}
@@ -52,7 +52,8 @@ export default function (props) {
         <RightPanel
           rightPanelMode={rightPanelMode}
           setRightPanelMode={setRightPanelMode}
-          refetch={refetch}
+          refetchMess={refetchMess}
+          refetchAcc={props.refetchAcc}
           account={props.account}
           logged={props.logged}
           selectedChat={selectedChat}

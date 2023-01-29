@@ -1,6 +1,21 @@
 import React from "react";
+import ChatPreview from "./ChatPreview";
+import { useEffect } from "react";
 
 export default function (props) {
+  //useEffect(() => {
+  //let interval = setInterval(() => {
+  // props.refetchAcc();
+  //}, 5000);
+  //return () => {
+  //clearInterval(interval);
+  //};
+  //}, []);
+
+  useEffect(() => {
+    props.refetchAcc();
+  }, []);
+
   return (
     <div>
       <h3>Chatlist</h3>
@@ -9,15 +24,11 @@ export default function (props) {
           key={index}
           onClick={() => {
             props.setSelectedChat(queue.queueId);
+            props.refetchMess();
             props.setRightPanelMode("messWin");
           }}
         >
-          <div className="friendListItem">
-            <div>
-              <b>{queue.queueName}</b>
-            </div>
-            <div className="friendListLastMes">{queue.latestMessage}</div>
-          </div>
+          <ChatPreview queue={queue}/>
         </div>
       ))}
     </div>
