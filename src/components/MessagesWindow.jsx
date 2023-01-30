@@ -62,11 +62,12 @@ export default function (props) {
               <div>
                 <FontAwesomeIcon
                   icon={["fas", sender?.avatar ?? "user"]}
-                  size="sm"
+                  size="xl"
+                  className="messAvatar"
                 />{" "}
-                <b>
-                  <div>{sender?.userName ?? ""}</div>
-                </b>
+                <div className="messName">
+                  <b>{sender?.userName ?? ""}</b>
+                </div>
                 <div>{message?.sent ?? ""}</div>
               </div>
               <div className="mention">{message.mess}</div>
@@ -75,18 +76,21 @@ export default function (props) {
         } else {
           return (
             <div key={index} className="messParent">
-              <div>
+              <div className="wrapper1">
                 <FontAwesomeIcon
                   icon={["fas", sender?.avatar ?? "user"]}
-                  size="sm"
+                  size="xl"
                 />{" "}
-                <b>
-                  <div>{sender?.userName ?? ""}</div>
-                </b>
-                <div>{formatDate(message?.sent ?? "")}</div>
               </div>
-              <div className="messTime">{message?.sent ?? ""} </div>
-              <div className="messMessage">{message.mess}</div>
+              <div className="wrapper2">
+                <div className="messName">
+                  <b>{sender?.userName ?? ""}</b>
+                </div>
+                <div className="messTime">
+                  {formatDate(message?.sent ?? "")}
+                </div>
+                <div className="messMessage">{message.mess}</div>
+              </div>
             </div>
           );
         }

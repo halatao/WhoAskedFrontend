@@ -6,25 +6,9 @@ Form {
   width: 25%;
 }
 
-.messParent{
 
-}
 
-.messName{
-margin-right: 5px;
-  display: inline-block;
-}
 
-.messAvatar{
-
-}
-.messTime{
-  display: inline-block;
-  font-size: 12px;
-}
-.messMessage{
-
-}
 
 .chatLink{
   text-decoration: none;
@@ -76,6 +60,7 @@ margin-right: 5px;
   max-width: 25%;
   display: flex;
   flex-direction: column;
+  border-radius: 25px;
 }
 .second {
   flex: 1;
@@ -86,43 +71,57 @@ margin-right: 5px;
   max-height: 100%;
   display: flex;
   flex-direction: column;
+  border-radius: 25px;
 }
 
 .leftPanelUpper {
   background-color: yellow;
-  height: 6%;
+  border-radius: 15px 15px 0px 0px;
+  flex: 1;
+  display: flex;
+  align-items: center;
 }
 
 .leftPanelMid {
+  flex: 12;
   background-color: White;
-  flex-grow: 2;
+
 }
 
 .leftPanelLower {
+  flex: 1;
   background-color: yellow;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 6%;
+  border-radius: 0px 0px 15px 15px ;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
 }
 
 .rightPanelUpper {
   background-color: yellow;
-  height: 6%;
+flex: 1;
+  border-radius: 15px 15px 0px 0px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
 }
 
 .rightPanelMid {
   background-color: white;
   overflow: auto;
-  flex-grow: 2;
+  flex: 12;
   display: flex;
   flex-direction: column-reverse;
 }
 
 .rightPanelLower {
-  background-color: white;
-  width: 100%;
-  height: 30px;
+background-color: white;
+  flex: 1;
+  border-radius: 0px 0px 15px 15px ;
+  display: flex;
+  align-items: center;
+  line-height: 1px;
+  border-top: 1px solid lightgray;
 }
 
 .friendListItem {
@@ -138,8 +137,7 @@ margin-right: 5px;
 }
 
 .messageInput {
-  flex: 2;
-  width: 100%;
+  flex: 7;
 }
 
 .messageButton {
@@ -152,9 +150,10 @@ margin-right: 5px;
   display: flex;
   flex-direction: row;
   gap: 1rem;
-  height: 100%;
-  align-items: start;
   padding-left: 10px;
+  align-items: center;
+  width: 100%;
+
 }
 
 .notSeen {
@@ -162,4 +161,57 @@ margin-right: 5px;
 }
 .notSeenFont {
   font-weight: 700;
+}
+
+.messParent{
+  margin-top: 17px;
+
+  display: flex;
+}
+
+.messName{
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.messAvatar{
+display: flex;
+}
+.messTime{
+  display: inline-block;
+  font-size: 12px;
+}
+.messMessage{
+
+}
+
+.inputButton{
+
+}
+
+.textAreaStyle{
+
+}
+
+.wrapper1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.wrapper2{
+padding-left: 5px;
+}
+
+.wrapper3{
+
+}
+
+.chatList{
+  padding-left: 10px;
+}
+
+.leftPanelLowerInside{
+
 }

@@ -9,7 +9,7 @@ export default function (props) {
   }, []);
 
   return (
-    <div>
+    <div className="chatList">
       <h3>Chatlist</h3>
       {props.account?.queues?.map((queue, index) => (
         <Link
