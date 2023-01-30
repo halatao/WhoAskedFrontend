@@ -106,10 +106,11 @@ export default function (props) {
       </div>
 
       <div className="leftPanelLower">
-        <FontAwesomeIcon icon={props.account?.avatar} size="xl" />
-        <label>{props.account.userName}</label>
-
-        <button onClick={props.setLogout}>Logout</button>
+        <div className="leftPanelLowerInside">
+          <FontAwesomeIcon icon={props.account?.avatar} size="xl" />
+          <label>{props.account.userName}</label>
+          <button onClick={props.setLogout}>Logout</button>
+        </div>
       </div>
     </div>
   );
