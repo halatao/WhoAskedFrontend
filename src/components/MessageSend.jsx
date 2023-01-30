@@ -30,7 +30,7 @@ export default function (props) {
           sender: senderId,
           queueId: queueId,
           mess: message,
-          sent: "2023-01-26T15:53:20.083",
+          sent: new Date().toISOString(),
         },
         {
           headers: authHeader(),
@@ -44,6 +44,7 @@ export default function (props) {
         console.log(error);
       });
   };
+
   return (
     <form
       className="messLower"

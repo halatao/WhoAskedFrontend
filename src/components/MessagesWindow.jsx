@@ -45,8 +45,10 @@ export default function (props) {
   const messages = props.messages;
 
   function formatDate(param) {
-    var date = new Date(param);
-    console.log(format(date, "H:mma"));
+    let date = new Date(param);
+    let offset = new Date().getTimezoneOffset();
+    date.setMinutes(date.getMinutes() - offset);
+    return format(date, "H:mma");
   }
 
   return (
@@ -57,24 +59,31 @@ export default function (props) {
         if (symbol) {
           return (
             <div key={index} className="messParent">
-              <FontAwesomeIcon icon={sender?.avatar} size="sm" />{" "}
-              <b>
-                <div>{sender?.userName ?? ""}</div>
-              </b>
-              <div>{message?.sent ?? ""}</div>
+              <div>
+                <FontAwesomeIcon
+                  icon={["fas", sender?.avatar ?? "user"]}
+                  size="sm"
+                />{" "}
+                <b>
+                  <div>{sender?.userName ?? ""}</div>
+                </b>
+                <div>{message?.sent ?? ""}</div>
+              </div>
               <div className="mention">{message.mess}</div>
             </div>
           );
         } else {
           return (
             <div key={index} className="messParent">
-              <FontAwesomeIcon
-                icon={sender?.avatar}
-                size="sm"
-                className="messAvatar"
-              />{" "}
-              <div className="messName">
-                <b>{sender?.userName ?? ""} </b>
+              <div>
+                <FontAwesomeIcon
+                  icon={["fas", sender?.avatar ?? "user"]}
+                  size="sm"
+                />{" "}
+                <b>
+                  <div>{sender?.userName ?? ""}</div>
+                </b>
+                <div>{formatDate(message?.sent ?? "")}</div>
               </div>
               <div className="messTime">{message?.sent ?? ""} </div>
               <div className="messMessage">{message.mess}</div>
