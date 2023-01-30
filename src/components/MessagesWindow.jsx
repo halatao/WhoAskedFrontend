@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { React, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { format } from "date-fns";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -42,6 +43,12 @@ export default function (props) {
   const loggedAcc = props.account.userName;
 
   const messages = props.messages;
+
+  function formatDate(param) {
+    var date = new Date(param);
+    console.log(format(date, "H:mma"));
+  }
+
   return (
     <div>
       {messages.map((message, index) => {
@@ -51,8 +58,11 @@ export default function (props) {
           return (
             <div key={index}>
               <div>
-                <FontAwesomeIcon icon={sender?.avatar} size="sm" />{" "}
-                <b>{sender?.userName ?? ""}</b>
+              <FontAwesomeIcon icon={sender?.avatar} size="sm" />{" "}
+                <b>
+                  <div>{sender?.userName ?? ""}</div>
+                </b>
+                <div>{message?.sent ?? ""}</div>
               </div>
               <div className="mention">{message.mess}</div>
             </div>
@@ -60,11 +70,13 @@ export default function (props) {
         } else {
           return (
             <div key={index}>
-              <div>
-                <FontAwesomeIcon icon={sender?.avatar} size="sm" />{" "}
-                <b>{sender?.userName ?? ""}</b>
+             <div>
+              <FontAwesomeIcon icon={sender?.avatar} size="sm" />{" "}
+                <b>
+                  <div>{sender?.userName ?? ""}</div>
+                </b>
+                <div>{message?.sent ?? ""}</div>
               </div>
-
               <div>{message.mess}</div>
             </div>
           );

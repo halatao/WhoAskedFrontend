@@ -23,36 +23,7 @@ function App() {
 
   useEffect(() => {
     refetch();
-   /* window.addEventListener("beforeunload", (event) => {
-      event.preventDefault();
-      event.returnValue = "";
-      SetStatusOffline();
-    });*/
   }, []);
-
-  function SetStatusOffline() {
-    axios
-      .post(
-        "https://localhost:7129/api/Users/UserStatus?username=" +
-          localStorage.getItem("username") +
-          "&active=false",
-        { headers: authHeader() }
-      )
-      .then((res) => {
-        setLogout();
-      });
-  }
-
-  function SetStatusOnline() {
-    axios
-      .post(
-        "https://localhost:7129/api/Users/UserStatus?username=" +
-          localStorage.getItem("username") +
-          "&active=true",
-        { headers: authHeader() }
-      )
-      .then((res) => {});
-  }
 
   function refetch() {
     let jwt = localStorage.getItem("jwt");
@@ -67,11 +38,10 @@ function App() {
           setAccount(res.data);
           if (!logged) {
             setLogged();
-            SetStatusOnline();
           }
         })
         .catch((res) => {
-          if (res.status == 401) {
+          if (res.response.status == 401) {
             setLogout();
           }
         });
@@ -112,11 +82,17 @@ function App() {
         <Route
           path="/index/:queueId"
           element={
-            <Panels account={account} logged={logged} setLogout={setLogout} refetchAcc={refetch} />
+            <Panels
+              account={account}
+              logged={logged}
+              setLogout={setLogout}
+              refetchAcc={refetch}
+            />
           }
         />
 
         <Route path="/" element={<LoginRedirect />} />
+        <Route path="*" element={<LoginRedirect />} />
       </Routes>
     </body>
   );

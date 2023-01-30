@@ -4,15 +4,6 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function (props) {
-  //useEffect(() => {
-  //let interval = setInterval(() => {
-  // props.refetchAcc();
-  //}, 5000);
-  //return () => {
-  //clearInterval(interval);
-  //};
-  //}, []);
-
   useEffect(() => {
     props.refetchAcc();
   }, []);

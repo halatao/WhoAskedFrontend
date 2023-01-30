@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import authHeader from "../services/AuthHeader";
 
 export default function (props) {
   const [message, setMessage] = useState("");
@@ -19,16 +20,22 @@ export default function (props) {
   };
   function validateThenSend() {
     sendMessage(props.senderId, queueId, message);
-    setMessage("")
+    setMessage("");
   }
   const sendMessage = (senderId, queueId, message) => {
     axios
-      .post("https://localhost:7129/api/Messages", {
-        sender: senderId,
-        queueId: queueId,
-        mess: message,
-        sent: "2023-01-26T15:53:20.083",
-      })
+      .post(
+        "https://localhost:7129/api/Messages",
+        {
+          sender: senderId,
+          queueId: queueId,
+          mess: message,
+          sent: "2023-01-26T15:53:20.083",
+        },
+        {
+          headers: authHeader(),
+        }
+      )
       .then(function (response) {
         console.log(response.data);
         props.refetchMess();
