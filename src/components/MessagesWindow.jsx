@@ -58,9 +58,12 @@ export default function (props) {
         let symbol = message.mess.includes("@" + loggedAcc);
         if (symbol) {
           return (
-            <div key={index}>
+            <div key={index} className="messParent">
               <div>
-                <FontAwesomeIcon icon={sender?.avatar} size="sm" />{" "}
+                <FontAwesomeIcon
+                  icon={["fas", sender?.avatar ?? "user"]}
+                  size="sm"
+                />{" "}
                 <b>
                   <div>{sender?.userName ?? ""}</div>
                 </b>
@@ -71,7 +74,7 @@ export default function (props) {
           );
         } else {
           return (
-            <div key={index}>
+            <div key={index} className="messParent">
               <div>
                 <FontAwesomeIcon
                   icon={["fas", sender?.avatar ?? "user"]}
@@ -82,7 +85,8 @@ export default function (props) {
                 </b>
                 <div>{formatDate(message?.sent ?? "")}</div>
               </div>
-              <div>{message.mess}</div>
+              <div className="messTime">{message?.sent ?? ""} </div>
+              <div className="messMessage">{message.mess}</div>
             </div>
           );
         }
