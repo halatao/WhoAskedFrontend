@@ -14,6 +14,10 @@ export default function (props) {
   const params = useParams();
   const queueId = params.queueId ?? 3;
 
+  const queues = props.account?.queues ?? [];
+  const allUsers = queues?.find((i) => i.queueId.toString() === queueId) ?? [];
+  const users = allUsers.users;
+
   const [messages, setMessages] = useState([]);
   function fetchMessages(id) {
     axios
@@ -29,6 +33,28 @@ export default function (props) {
       .then((response) => {
         setMessages(response.data);
       });
+  }
+
+  function clickHandler(rightPanelMode) {
+    if (rightPanelMode === "messSett") {
+      props.setRightPanelMode("messWin");
+    } else if (rightPanelMode === "messWin") {
+      props.setRightPanelMode("messSett");
+    }
+  }
+
+  function getButton() {
+    if (props.account.userName === allUsers.ownerUsername) {
+      return (
+        <button
+          onClick={() => {
+            clickHandler(props.rightPanelMode);
+          }}
+        >
+          Settings
+        </button>
+      );
+    }
   }
 
   useEffect(() => {
@@ -48,18 +74,13 @@ export default function (props) {
     <div className="second">
       <div className="rightPanelUpper">
         <label> User: {props.selectedUser?.queueName}</label>
-        <button
-          onClick={() => {
-            props.setRightPanelMode("messSett");
-          }}
-        >
-          Settings
-        </button>
+        {getButton()}
       </div>
 
       <div className="rightPanelMid">
         {showMessWindow ? (
           <MessagesWindow
+            users={users}
             account={props.account}
             messages={messages}
             refetchMess={props.refetchMess}

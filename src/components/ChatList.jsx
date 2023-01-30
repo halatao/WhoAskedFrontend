@@ -12,7 +12,11 @@ export default function (props) {
     <div>
       <h3>Chatlist</h3>
       {props.account?.queues?.map((queue, index) => (
-        <Link to={"/index/" + queue.queueId} key={index}>
+        <Link
+          to={"/index/" + queue.queueId}
+          key={index}
+          onClick={() => props.setRightPanelMode("messWin")}
+        >
           <ChatPreview queue={queue} />
         </Link>
       ))}

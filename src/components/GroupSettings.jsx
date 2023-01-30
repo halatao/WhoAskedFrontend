@@ -28,7 +28,11 @@ export default function (props) {
   };
 
   const deleteUser = () => {
-    postDelete(selectedUser, queueId);
+    if (selectedUser === allUsers.ownerUsername) {
+      console.log("owner se nemůže smazat");
+    } else {
+      postDelete(selectedUser, queueId);
+    }
   };
 
   const addUser = () => {
@@ -95,7 +99,7 @@ export default function (props) {
       <h4>Delete user</h4>
       <div>
         {users.map((users, index) => (
-          <div key={index} onClick={() => setSelectedUser(users.userId)}>
+          <div key={index} onClick={() => setSelectedUser(users.userName)}>
             {users.userName}
           </div>
         ))}
