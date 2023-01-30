@@ -70,6 +70,13 @@ export default function (props) {
         >
           messages
         </button>
+        <button
+          onClick={() => {
+            setMode("Settings");
+          }}
+        >
+          Settings
+        </button>
       </div>
       <div className="leftPanelMid">
         {showMessages ? (
@@ -101,14 +108,6 @@ export default function (props) {
       <div className="leftPanelLower">
         <FontAwesomeIcon icon={props.account?.avatar} size="xl" />
         <label>{props.account.userName}</label>
-
-        <button
-          onClick={() => {
-            setMode("Settings");
-          }}
-        >
-          Settings
-        </button>
 
         <button onClick={props.setLogout}>Logout</button>
       </div>

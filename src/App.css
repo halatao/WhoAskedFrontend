@@ -6,6 +6,31 @@ Form {
   width: 25%;
 }
 
+.messParent{
+
+}
+
+.messName{
+margin-right: 5px;
+  display: inline-block;
+}
+
+.messAvatar{
+
+}
+.messTime{
+  display: inline-block;
+  font-size: 12px;
+}
+.messMessage{
+
+}
+
+.chatLink{
+  text-decoration: none;
+  color: black;
+}
+
 .panels {
   display: flex;
   align-items: center;
