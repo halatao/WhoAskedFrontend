@@ -4,10 +4,8 @@ import LeftPanel from "./LeftPanel";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import LoginRedirect from "./LoginRedirect";
-
 export default function (props) {
   const [rightPanelMode, setRightPanelMode] = useState("messWin");
-
   return (
     <div className="panels">
       <div className="wrapper">

@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import axios from "axios";
+import authHeader from "../services/AuthHeader";
 
 export default function (props) {
   const [avatar, setAvatar] = useState("user");
@@ -11,10 +12,16 @@ export default function (props) {
 
   const postAvatar = (username, avatar) => {
     axios
-      .post("https://localhost:7129/api/Users/SetAvatar", {
-        userName: username,
-        avatarName: avatar,
-      })
+      .post(
+        "https://localhost:7129/api/Users/SetAvatar",
+        {
+          userName: username,
+          avatarName: avatar,
+        },
+        {
+          headers: authHeader(),
+        }
+      )
       .then(() => {
         props.refetchAcc();
       })

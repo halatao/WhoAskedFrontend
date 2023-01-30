@@ -1,18 +1,9 @@
 import React from "react";
 import ChatPreview from "./ChatPreview";
 import { useEffect } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function (props) {
-  //useEffect(() => {
-  //let interval = setInterval(() => {
-  // props.refetchAcc();
-  //}, 5000);
-  //return () => {
-  //clearInterval(interval);
-  //};
-  //}, []);
-
   useEffect(() => {
     props.refetchAcc();
   }, []);
@@ -21,10 +12,7 @@ export default function (props) {
     <div>
       <h3>Chatlist</h3>
       {props.account?.queues?.map((queue, index) => (
-        <Link
-          to={"/index/" + queue.queueId}
-          key={index}
-        >
+        <Link to={"/index/" + queue.queueId} key={index}>
           <ChatPreview queue={queue} />
         </Link>
       ))}

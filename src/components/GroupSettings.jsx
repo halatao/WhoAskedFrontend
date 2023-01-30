@@ -4,6 +4,7 @@ import axios from "axios";
 import FormInput from "./FormInput";
 import { Button, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import authHeader from "../services/AuthHeader";
 
 export default function (props) {
   const [selectedUser, setSelectedUser] = useState();
@@ -36,10 +37,16 @@ export default function (props) {
 
   const postDelete = (userId, queueId) => {
     axios
-      .post("https://localhost:7129/api/Users/RemoveFromQueue", {
-        userId: userId,
-        queueId: queueId,
-      })
+      .post(
+        "https://localhost:7129/api/Users/RemoveFromQueue",
+        {
+          userId: userId,
+          queueId: queueId,
+        },
+        {
+          headers: authHeader(),
+        }
+      )
       .then(() => {
         console.log("deleted");
       })
@@ -50,10 +57,16 @@ export default function (props) {
 
   const postAdd = (userName, queueId) => {
     axios
-      .post("https://localhost:7129/api/Users/AddToQueue", {
-        userName: userName,
-        queueId: queueId,
-      })
+      .post(
+        "https://localhost:7129/api/Users/AddToQueue",
+        {
+          userName: userName,
+          queueId: queueId,
+        },
+        {
+          headers: authHeader(),
+        }
+      )
       .then(() => {
         console.log("Added");
       })

@@ -4,6 +4,7 @@ import MessagesWindow from "./MessagesWindow";
 import GroupSettings from "./GroupSettings";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import authHeader from "../services/AuthHeader";
 
 export default function (props) {
   const showMessWindow = props.rightPanelMode === "messWin";
@@ -20,10 +21,12 @@ export default function (props) {
         "https://localhost:7129/api/Messages/" +
           id +
           "/10?userId=" +
-          props.account.userId
+          props.account.userId,
+        {
+          headers: authHeader(),
+        }
       )
       .then((response) => {
-        console.log(response.data[0].queueId);
         setMessages(response.data);
       });
   }
@@ -35,7 +38,7 @@ export default function (props) {
   useEffect(() => {
     let interval = setInterval(() => {
       fetchMessages(queueId);
-    }, 3000);
+    }, 2500);
     return () => {
       clearInterval(interval);
     };

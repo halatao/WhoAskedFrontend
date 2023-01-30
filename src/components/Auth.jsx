@@ -32,10 +32,10 @@ export default function (props) {
   const validateThenLogin = () => {
     if (!register) {
       authUser(values.username, values.password);
-    } else if (register && !secondPasswordInvalid) {
+    } else if (register) {
       if (values.password === values.password2) {
         authUser(values.username, values.password);
-      } else if (values.password == values.password2) {
+      } else {
         setAuthError("Passwords are not matching");
       }
     }
@@ -44,18 +44,16 @@ export default function (props) {
   const authUser = (user, pass) => {
     if (register) {
       axios
-        .post("https://localhost:7214/api/Users/RegUser", {
-          username: user,
+        .post(API_URL + "/Create", {
+          userName: user,
           password: pass,
         })
         .then(function (response) {
+          localStorage.setItem("jwt", JSON.stringify(response.data));
+          localStorage.setItem("username", user);
+          props.refetch();
           props.setLogged();
-          console.log(response.data);
-          navigate("/index/");
-          UserService.getUserBoard().then((res) => {
-            props.setAccount(res);
-            console.log(props.account);
-          });
+          navigate("/index/3");
         })
         .catch(function (error) {
           setAuthError("User already exist");
@@ -69,11 +67,13 @@ export default function (props) {
             localStorage.setItem("jwt", JSON.stringify(response.data));
             localStorage.setItem("username", user);
             props.refetch();
+            props.setLogged();
             navigate("/index/3");
           }
         })
         .catch(function (error) {
           setAuthError("Unable to login");
+          navigate("/login");
           console.log(error);
         });
     }
