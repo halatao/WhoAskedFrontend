@@ -1,7 +1,7 @@
 import React from "react";
 import ChatPreview from "./ChatPreview";
 import { useEffect } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function (props) {
   //useEffect(() => {
@@ -24,6 +24,7 @@ export default function (props) {
         <Link
           to={"/index/" + queue.queueId}
           key={index}
+          onClick={() => props.setRightPanelMode("messWin")}
         >
           <ChatPreview queue={queue} />
         </Link>
