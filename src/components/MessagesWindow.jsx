@@ -45,8 +45,10 @@ export default function (props) {
   const messages = props.messages;
 
   function formatDate(param) {
-    var date = new Date(param);
-    console.log(format(date, "H:mma"));
+    let date = new Date(param);
+    let offset = new Date().getTimezoneOffset();
+    date.setMinutes(date.getMinutes() - offset);
+    return format(date, "H:mma");
   }
 
   return (
@@ -58,7 +60,7 @@ export default function (props) {
           return (
             <div key={index}>
               <div>
-              <FontAwesomeIcon icon={sender?.avatar} size="sm" />{" "}
+                <FontAwesomeIcon icon={sender?.avatar} size="sm" />{" "}
                 <b>
                   <div>{sender?.userName ?? ""}</div>
                 </b>
@@ -70,12 +72,15 @@ export default function (props) {
         } else {
           return (
             <div key={index}>
-             <div>
-              <FontAwesomeIcon icon={sender?.avatar} size="sm" />{" "}
+              <div>
+                <FontAwesomeIcon
+                  icon={["fas", sender?.avatar ?? "user"]}
+                  size="sm"
+                />{" "}
                 <b>
                   <div>{sender?.userName ?? ""}</div>
                 </b>
-                <div>{message?.sent ?? ""}</div>
+                <div>{formatDate(message?.sent ?? "")}</div>
               </div>
               <div>{message.mess}</div>
             </div>
