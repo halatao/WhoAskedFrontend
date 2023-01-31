@@ -59,18 +59,21 @@ export default function (props) {
         if (symbol) {
           return (
             <div key={index} className="messParent">
-              <div>
+              <div className="wrapper1">
                 <FontAwesomeIcon
                   icon={["fas", sender?.avatar ?? "user"]}
                   size="xl"
-                  className="messAvatar"
                 />{" "}
+              </div>
+              <div className="wrapper2">
                 <div className="messName">
                   <b>{sender?.userName ?? ""}</b>
                 </div>
-                <div>{message?.sent ?? ""}</div>
+                <div className="messTime">
+                  {formatDate(message?.sent ?? "")}
+                </div>
+                <div className="mention">{message.mess}</div>
               </div>
-              <div className="mention">{message.mess}</div>
             </div>
           );
         } else {

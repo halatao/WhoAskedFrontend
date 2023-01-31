@@ -81,27 +81,28 @@ export default function (props) {
 
       <div className="rightPanelMid">
         {showMessWindow ? (
-          <MessagesWindow
-            users={users}
-            account={props.account}
-            messages={messages}
-            refetchMess={props.refetchMess}
-            refetchAcc={props.refetchAcc}
-          />
+          <div>
+            <MessagesWindow
+              users={users}
+              account={props.account}
+              messages={messages}
+              refetchMess={props.refetchMess}
+              refetchAcc={props.refetchAcc}
+            />
+            <div className="rightPanelLower">
+              <MessageSend
+                refetchMess={() => fetchMessages(queueId)}
+                refetchAcc={props.refetchAcc}
+                senderId={props.account?.userId}
+              />
+            </div>
+          </div>
         ) : null}
         {showSettWindow ? (
           <GroupSettings account={props.account} messages={props.messages} />
         ) : null}
 
         {showWelcomeWindow ? <h1>WELCOME</h1> : null}
-      </div>
-
-      <div className="rightPanelLower">
-        <MessageSend
-          refetchMess={() => fetchMessages(queueId)}
-          refetchAcc={props.refetchAcc}
-          senderId={props.account?.userId}
-        />
       </div>
     </div>
   );
