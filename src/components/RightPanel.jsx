@@ -51,7 +51,7 @@ export default function (props) {
             clickHandler(props.rightPanelMode);
           }}
         >
-          Settings
+          Group
         </button>
       );
     }
@@ -73,8 +73,10 @@ export default function (props) {
   return (
     <div className="second">
       <div className="rightPanelUpper">
-        <label> User: {props.selectedUser?.queueName}</label>
-        {getButton()}
+        <div className="rightPanelUpperLabel">
+          <label> {allUsers.queueName}</label>
+        </div>
+        <div className="rightPanelUpperSettButt">{getButton()}</div>
       </div>
 
       <div className="rightPanelMid">

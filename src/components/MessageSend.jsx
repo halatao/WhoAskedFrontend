@@ -65,7 +65,9 @@ export default function (props) {
       />
 
       <div className="messageButton">
-        <Button type="submit">Send</Button>
+        <Button className="buttonButton" type="submit">
+          Send
+        </Button>
       </div>
     </form>
   );

@@ -97,7 +97,7 @@ export default function (props) {
   }
   function getLoginForm() {
     return (
-      <div>
+      <div style={{ color: "white" }}>
         <FormInput
           Name="username"
           Type="text"
@@ -125,47 +125,66 @@ export default function (props) {
   }
   function getSecondPassword() {
     return (
-      <FormInput
-        Name="password2"
-        Type="password"
-        Label="Confirm password"
-        Placeholder="Confirm password"
-        handleInputChange={handleInputChange}
-        value={values.secondPassword}
-        setInvalid={setSecondPasswordInvalid}
-        error={props.error}
-        notError={props.notError}
-      />
+      <div style={{ color: "white" }}>
+        <FormInput
+          Name="password2"
+          Type="password"
+          Label="Confirm password"
+          Placeholder="Confirm password"
+          handleInputChange={handleInputChange}
+          value={values.secondPassword}
+          setInvalid={setSecondPasswordInvalid}
+          error={props.error}
+          notError={props.notError}
+        />
+      </div>
     );
   }
   function getButton(param) {
     return (
-      <Button variant="primary" onClick={validateThenLogin}>
+      <Button
+        className="buttonButtonButton"
+        variant="primary"
+        onClick={validateThenLogin}
+      >
         {param}
       </Button>
     );
   }
 
   return (
-    <div>
+    <div className="authWindow">
       {register ? (
-        <div>
-          <Form>
-            {getLoginForm()}
-            {getSecondPassword()}
-            {getButton("Register")}
-          </Form>
-          <p onClick={toggleRegister}>Already have account?</p>
-          <ErrorMessage justDisplay={true} authError={authError} />
+        <div className="loginForm">
+          <div className="one">
+            <Form>
+              {getLoginForm()}
+              {getSecondPassword()}
+              {getButton("Register")}
+            </Form>
+          </div>
+          <div className="two">
+            <p style={{ color: "white" }} onClick={toggleRegister}>
+              Already have account?
+            </p>
+            <ErrorMessage justDisplay={true} authError={authError} />
+          </div>
         </div>
       ) : (
-        <div>
-          <Form>
-            {getLoginForm()}
-            {getButton("Login")}
-          </Form>
-          <p onClick={toggleRegister}>Dont have account?</p>
-          <ErrorMessage justDisplay={true} authError={authError} />
+        <div className="loginForm">
+          <div className="one">
+            <Form>
+              {getLoginForm()}
+              {getButton("Login")}
+            </Form>
+          </div>
+          <div className="two">
+            <p style={{ color: "white" }} onClick={toggleRegister}>
+              Dont have account?
+            </p>
+
+            <ErrorMessage justDisplay={true} authError={authError} />
+          </div>
         </div>
       )}
     </div>
