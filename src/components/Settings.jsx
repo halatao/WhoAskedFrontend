@@ -32,8 +32,10 @@ export default function (props) {
 
   return (
     <div>
-      <h3>Settings</h3>
-      <h5>Change avatar</h5>
+      <div className="settingsTitles">
+        <h3>Settings</h3>
+        <h5>Change avatar</h5>
+      </div>
       <div className="avatarParent">
         <div
           className="avatar"
@@ -115,7 +117,7 @@ export default function (props) {
           <FontAwesomeIcon icon={"wheelchair"} size="2xl" />
         </div>
       </div>
-      <button onClick={saveAvatar} type="submit">
+      <button className="buttonButton" onClick={saveAvatar} type="submit">
         save
       </button>
     </div>

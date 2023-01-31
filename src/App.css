@@ -1,14 +1,92 @@
 body {
-  background-color: rebeccapurple;
+  height: 100vh;
+  width: 100%;
+
+}
+
+
+html{
+  height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(to right bottom, #000000, #2a071a, #470037, #5d0061, #610096);
+
+}
+
+.buttonButtonButton{
+  margin-top: 10px;
+}
+
+.one{
+display: flex;
+  justify-content: center;
+}
+
+.two{
+  display: flex;
+  justify-content: center;
+}
+
+.authWindow{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: 100vh;
+}
+
+.uzNevim{
+  width: 100%;
+  height: 100%;
 }
 
 Form {
   width: 25%;
 }
 
+input{
+  border-radius: 10px;
+  padding: 5px;
+  border: 2px solid #a6a6a6;
+}
 
+button{
+  border-radius: 10px;
+  border: hidden;
+  color: black;
+  background-color: white;
+  padding: 6px;
+}
 
+button:hover{
+  background-color: lightgray;
+}
 
+.loginForm{
+  flex: 5;
+height: 100%;
+  display: flex;
+flex-direction: column;
+  width: 100%;
+  justify-content: center;
+}
+
+.formInputRightPanelLower{
+  border-radius: 25px;
+}
+
+.settingsTitles{
+  margin-left: 10px;
+}
+
+.buttonButton:hover{
+background-color: #a2a2a2;
+}
+
+.buttonButton{
+  border: 5px black;
+  background-color: lightgray;
+  padding:8px 22px 8px 22px;
+  margin-left: 10px;
+}
 
 .chatLink{
   text-decoration: none;
@@ -16,6 +94,7 @@ Form {
 }
 
 .panels {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,22 +118,36 @@ Form {
 
 .avatar:hover {
   background: #e1e1e1;
-  border: 3px solid yellow;
+
 }
 
 .avatar:focus {
-  background-color: yellow;
-  border: 3px solid black;
+  background-color: lightgray;
+  border: 3px solid #9b9b9b;
 }
 
 .wrapper {
   display: flex;
   height: 85%;
-  width: 1500px;
+  width: 80%;
 }
+
+
+@media screen and (max-width: 1024px) {
+  .wrapper{
+    width: 100%;
+  }
+  .panels{
+    width: 100%;
+  }
+}
+
+
+
+
+
 .first {
-  flex: 1;
-  border: 1px solid black;
+flex: 1;
   position: relative;
   height: 100%;
   max-width: 25%;
@@ -63,11 +156,10 @@ Form {
   border-radius: 25px;
 }
 .second {
-  flex: 1;
-  margin-left: 50px;
-  border: 1px solid black;
+flex: 1;
+  margin-left: 4%;
+  width: 100%;
   height: 100%;
-
   max-height: 100%;
   display: flex;
   flex-direction: column;
@@ -75,11 +167,12 @@ Form {
 }
 
 .leftPanelUpper {
-  background-color: yellow;
+  background-image: linear-gradient(to left top, #000000, #2a071a, #470037, #5d0061, #610096);
   border-radius: 15px 15px 0px 0px;
   flex: 1;
   display: flex;
   align-items: center;
+  color: white;
 }
 
 .leftPanelMid {
@@ -90,20 +183,22 @@ Form {
 
 .leftPanelLower {
   flex: 1;
-  background-color: yellow;
+  background-image: linear-gradient(to left top, #000000, #2a071a, #470037, #5d0061, #610096);
   border-radius: 0px 0px 15px 15px ;
   display: flex;
   align-items: center;
   padding-left: 10px;
+  color: white;
 }
 
 .rightPanelUpper {
-  background-color: yellow;
+  background-image: linear-gradient(to left top, #000000, #2a071a, #470037, #5d0061, #610096);
 flex: 1;
   border-radius: 15px 15px 0px 0px;
   display: flex;
   align-items: center;
   padding-left: 10px;
+  color: white;
 }
 
 .rightPanelMid {
@@ -130,6 +225,10 @@ background-color: white;
 
 .friendListLastMes {
   color: grey;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-right: 10px;
 }
 
 .lol {
@@ -158,9 +257,11 @@ background-color: white;
 
 .notSeen {
   background-color: whitesmoke;
+
 }
 .notSeenFont {
   font-weight: 700;
+
 }
 
 .messParent{
@@ -195,7 +296,7 @@ display: flex;
 
 .wrapper1{
   display: flex;
-  align-items: center;
+  padding-top: 11px;
   justify-content: center;
   margin-left: 10px;
 }
@@ -210,8 +311,51 @@ padding-left: 5px;
 
 .chatList{
   padding-left: 10px;
+
 }
 
 .leftPanelLowerInside{
+display: flex;
+  width: 100%;
+}
 
+.leftLowerUsername{
+  margin-left: 5px;
+flex: 1;
+}
+
+.leftLowerAvatar{
+
+}
+
+.leftLowerButton{
+flex: 1;
+  display: flex;
+  justify-content: end;
+  margin-right: 10px;
+}
+
+.leftPanelMessButt{
+flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.leftPanelSettButt{
+flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rightPanelUpperSettButt{
+  flex: 1;
+  display: flex;
+  justify-content: end;
+  padding-right: 20px;
+}
+
+.rightPanelUpperLabel{
+flex: 1;
 }

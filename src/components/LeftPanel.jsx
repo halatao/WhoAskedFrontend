@@ -63,20 +63,24 @@ export default function (props) {
   return (
     <div className="first">
       <div className="leftPanelUpper">
-        <button
-          onClick={() => {
-            setMode("mess");
-          }}
-        >
-          messages
-        </button>
-        <button
-          onClick={() => {
-            setMode("Settings");
-          }}
-        >
-          Settings
-        </button>
+        <div className="leftPanelMessButt">
+          <button
+            onClick={() => {
+              setMode("mess");
+            }}
+          >
+            Messages
+          </button>
+        </div>
+        <div className="leftPanelSettButt">
+          <button
+            onClick={() => {
+              setMode("Settings");
+            }}
+          >
+            Settings
+          </button>
+        </div>
       </div>
       <div className="leftPanelMid">
         {showMessages ? (
@@ -107,9 +111,15 @@ export default function (props) {
 
       <div className="leftPanelLower">
         <div className="leftPanelLowerInside">
-          <FontAwesomeIcon icon={props.account?.avatar} size="xl" />
-          <label>{props.account.userName}</label>
-          <button onClick={props.setLogout}>Logout</button>
+          <div className="leftLowerAvatar">
+            <FontAwesomeIcon icon={props.account?.avatar} size="xl" />
+          </div>
+          <div className="leftLowerUsername">
+            <label>{props.account.userName}</label>
+          </div>
+          <div className="leftLowerButton">
+            <button onClick={props.setLogout}>Logout</button>
+          </div>
         </div>
       </div>
     </div>
