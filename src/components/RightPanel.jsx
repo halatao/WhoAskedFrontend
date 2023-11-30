@@ -6,11 +6,22 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import authHeader from "../services/AuthHeader";
 import useWebSocket, { ReadyState } from "react-use-websocket"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUserGroup,
+
+} from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+library.add(
+    faUserGroup,
+);
+
+
 
 export default function (props) {
   const showMessWindow = props.rightPanelMode === "messWin";
   const showSettWindow = props.rightPanelMode === "messSett";
-  const showWelcomeWindow = props.rightPanelMode === "messWelcome";
+  //const showWelcomeWindow = props.rightPanelMode === "messWelcome";
 
   const params = useParams();
   const queueId = params.queueId ?? 3;
@@ -50,13 +61,9 @@ export default function (props) {
   function getButton() {
     if (props.account.userName === allUsers.ownerUsername) {
       return (
-        <button
-          onClick={() => {
+          <FontAwesomeIcon style={{cursor:"pointer"}} icon="fa-solid fa-user-group" onClick={() => {
             clickHandler(props.rightPanelMode);
-          }}
-        >
-          Group
-        </button>
+          }}/>
       );
     }
   }
@@ -83,9 +90,8 @@ export default function (props) {
         <div className="rightPanelUpperSettButt">{getButton()}</div>
       </div>
 
+
       <div className="rightPanelMid">
-        {showMessWindow ? (
-          <div>
             <MessagesWindow
               users={users}
               account={props.account}
@@ -93,20 +99,13 @@ export default function (props) {
               refetchMess={props.refetchMess}
               refetchAcc={props.refetchAcc}
             />
-            <div className="rightPanelLower">
-              <MessageSend
-                refetchMess={() => fetchMessages(queueId)}
-                refetchAcc={props.refetchAcc}
-                senderId={props.account?.userId}
-              />
-            </div>
-          </div>
-        ) : null}
-        {showSettWindow ? (
-          <GroupSettings account={props.account} messages={props.messages} />
-        ) : null}
-
-        {showWelcomeWindow ? <h1>WELCOME</h1> : null}
+      </div>
+      <div className="rightPanelLower">
+        <MessageSend
+            refetchMess={() => fetchMessages(queueId)}
+            refetchAcc={props.refetchAcc}
+            senderId={props.account?.userId}
+        />
       </div>
     </div>
   );

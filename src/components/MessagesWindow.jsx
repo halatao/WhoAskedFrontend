@@ -55,7 +55,7 @@ export default function (props) {
 
 
   function Bubble(message, index){
-    const sender = props.users.find((i) => i.userId == message.sender);
+    const sender = props.users?.find((i) => i.userId == message.sender);
     const symbol = message.mess.includes("@" + loggedAcc);
 
     if(loggedAcc === sender?.userName){
@@ -63,7 +63,7 @@ export default function (props) {
           <div key={index} className="messParentReply">
 
             <div className="wrapper2">
-<div className="wrapper3">
+                <div className="wrapper3">
               <div className="messTimeReply">
                 {formatDate(message?.sent ?? "")}
               </div>
@@ -71,7 +71,7 @@ export default function (props) {
               <div className="messName">
                 <b>{sender?.userName ?? ""}</b>
               </div>
-</div>
+                </div>
               <div className="messMessageReply">
                 <div style={{color: symbol ? "#5a94fd" : "white",backgroundColor:"purple", width: "fit-content", padding:"7pt", borderRadius:"25px"}}>{message.mess}</div>
                 <FontAwesomeIcon
@@ -105,12 +105,9 @@ export default function (props) {
       );
     }
   }
-
-
   return (
     <div>
       {messages.map((message, index) => {
-
           return Bubble(message, index);
       })}
     </div>

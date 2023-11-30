@@ -37,7 +37,6 @@ export default function (props) {
         }
       )
       .then(function (response) {
-        console.log(response.data);
         props.refetchMess();
       })
       .catch(function (error) {
@@ -62,6 +61,7 @@ export default function (props) {
         setInvalid={setMessageInvalid}
         value={message}
         handleInputChange={handleInputChange}
+        autoComplete="new-password"
       />
 
       <div className="messageButton">

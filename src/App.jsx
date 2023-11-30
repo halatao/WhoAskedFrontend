@@ -57,6 +57,7 @@ function App() {
   function setLogout() {
     localStorage.removeItem("jwt");
     localStorage.removeItem("username");
+    localStorage.removeItem("userId");
     setLogg(false);
     navigate("/login");
   }

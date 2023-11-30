@@ -19,11 +19,14 @@ import {
   faFaceSmile,
   faSkull,
   faFaceFrown,
-  faShieldHalved,
+  faShieldHalved, faArrowRightFromBracket, faGear, faComments,
 } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 library.add(
+    faArrowRightFromBracket,
+  faComments,
   faUser,
+  faGear,
   faShieldHalved,
   faLaptop,
   faUserSecret,
@@ -64,22 +67,14 @@ export default function (props) {
     <div className="first">
       <div className="leftPanelUpper">
         <div className="leftPanelMessButt">
-          <button
-            onClick={() => {
-              setMode("mess");
-            }}
-          >
-            Messages
-          </button>
+          <FontAwesomeIcon style={{cursor:"pointer"}} icon="fa-solid fa-comments" onClick={() => {
+            setMode("mess");
+          }}/>
         </div>
         <div className="leftPanelSettButt">
-          <button
-            onClick={() => {
-              setMode("Settings");
-            }}
-          >
-            Settings
-          </button>
+          <FontAwesomeIcon style={{cursor:"pointer"}} icon="fa-solid fa-gear" onClick={() => {
+            setMode("Settings");
+          }}/>
         </div>
       </div>
       <div className="leftPanelMid">
@@ -118,7 +113,7 @@ export default function (props) {
             <label>{props.account.userName}</label>
           </div>
           <div className="leftLowerButton">
-            <button onClick={props.setLogout}>Logout</button>
+            <FontAwesomeIcon style={{cursor:"pointer"}} icon="fa-solid fa-arrow-right-from-bracket" onClick={props.setLogout}/>
           </div>
         </div>
       </div>
