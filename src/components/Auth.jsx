@@ -97,7 +97,7 @@ export default function (props) {
   }
   function getLoginForm() {
     return (
-      <div style={{ color: "white" }}>
+      <div style={{ color: "white",display:"flex", flexDirection:"column" }}>
         <FormInput
           Name="username"
           Type="text"
@@ -156,34 +156,54 @@ export default function (props) {
     <div className="authWindow">
       {register ? (
         <div className="loginForm">
+          <div className="registerborder">
           <div className="one">
             <Form>
+              <div className="loginlabel">
+                <h1>REGISTER</h1>
+              </div>
               {getLoginForm()}
               {getSecondPassword()}
-              {getButton("Register")}
+              <div style={{color:"white"}}>
+              <ErrorMessage justDisplay={true} authError={authError} />
+              </div>
+              <div className="loginbutton">
+                {getButton("Register")}
+              </div>
             </Form>
           </div>
           <div className="two">
-            <p style={{ color: "white" }} onClick={toggleRegister}>
+            <p style={{ color: "white",cursor:"pointer" }} onClick={toggleRegister}>
               Already have account?
             </p>
-            <ErrorMessage justDisplay={true} authError={authError} />
+          </div>
           </div>
         </div>
       ) : (
         <div className="loginForm">
+          <div className="loginborder">
           <div className="one">
             <Form>
+              <div className="loginlabel">
+                <h1>LOGIN</h1>
+              </div>
+              <div>
               {getLoginForm()}
-              {getButton("Login")}
+                <div style={{color:"white"}}>
+                <ErrorMessage justDisplay={true} authError={authError} />
+                </div>
+              </div>
+              <div className="loginbutton">
+                {getButton("Login")}
+              </div>
+
             </Form>
           </div>
           <div className="two">
-            <p style={{ color: "white" }} onClick={toggleRegister}>
-              Dont have account?
+            <p style={{ color: "white", cursor:"pointer" }} onClick={toggleRegister}>
+              Don't have account?
             </p>
-
-            <ErrorMessage justDisplay={true} authError={authError} />
+          </div>
           </div>
         </div>
       )}

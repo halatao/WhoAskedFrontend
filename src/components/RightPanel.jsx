@@ -91,22 +91,32 @@ export default function (props) {
       </div>
 
 
-      <div className="rightPanelMid">
-            <MessagesWindow
-              users={users}
-              account={props.account}
-              messages={messages}
-              refetchMess={props.refetchMess}
-              refetchAcc={props.refetchAcc}
+        <div className="rightPanelMid">
+            {props.rightPanelMode === 'messSett' ? (
+                <GroupSettings
+                    account={props.account}
+                    messages={messages}
+                />
+            ) : (
+                <MessagesWindow
+                    users={users}
+                    account={props.account}
+                    messages={messages}
+                    refetchMess={props.refetchMess}
+                    refetchAcc={props.refetchAcc}
+                />
+            )}
+        </div>
+
+        <div className="rightPanelLower">
+            <MessageSend
+                refetchMess={() => fetchMessages(queueId)}
+                refetchAcc={props.refetchAcc}
+                senderId={props.account?.userId}
             />
-      </div>
-      <div className="rightPanelLower">
-        <MessageSend
-            refetchMess={() => fetchMessages(queueId)}
-            refetchAcc={props.refetchAcc}
-            senderId={props.account?.userId}
-        />
-      </div>
+        </div>
+
+
     </div>
   );
 }
