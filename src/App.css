@@ -264,9 +264,16 @@ background-color: white;
 
 }
 
+.messParentReply{
+  margin-top: 17px;
+justify-content: end;
+  display: flex;
+  padding-right: 5px;
+}
+
 .messParent{
   margin-top: 17px;
-
+padding-left: 5px;
   display: flex;
 }
 
@@ -278,11 +285,28 @@ background-color: white;
 .messAvatar{
 display: flex;
 }
+
+.messTimeReply{
+
+  font-size: 12px;
+  margin-right: 5px;
+}
+
 .messTime{
   display: inline-block;
   font-size: 12px;
 }
+.messMessageReply{
+display: flex;
+  justify-content: end;
+  height: fit-content;
+  align-items: center;
+}
+
 .messMessage{
+  display: flex;
+  height: fit-content;
+  align-items: center;
 
 }
 
@@ -294,6 +318,14 @@ display: flex;
 
 }
 
+.wrapper1Reply{
+  display: flex;
+  justify-content: center;
+  margin-right: 10px;
+  margin-left: 2px;
+  align-items: start;
+}
+
 .wrapper1{
   display: flex;
   padding-top: 11px;
@@ -303,6 +335,12 @@ display: flex;
 
 .wrapper2{
 padding-left: 5px;
+}
+
+.wrapper3{
+  display: flex;
+  justify-content: right;
+  align-items: center;
 }
 
 .wrapper3{

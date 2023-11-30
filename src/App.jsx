@@ -26,6 +26,7 @@ function App() {
   }, []);
 
   function refetch() {
+
     let jwt = localStorage.getItem("jwt");
     let username = localStorage.getItem("username");
     const API_URL = "https://localhost:7129/api/Users/ByUsername?username=";
@@ -36,6 +37,7 @@ function App() {
         })
         .then((res) => {
           setAccount(res.data);
+          localStorage.setItem("userId", res.data.userId);
           if (!logged) {
             setLogged();
           }
@@ -64,7 +66,7 @@ function App() {
   }
 
   return (
-    <body>
+    <div>
       <Routes>
         <Route
           path="/login"
@@ -94,7 +96,7 @@ function App() {
         <Route path="/" element={<LoginRedirect />} />
         <Route path="*" element={<LoginRedirect />} />
       </Routes>
-    </body>
+    </div>
   );
 }
 

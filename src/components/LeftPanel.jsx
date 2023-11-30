@@ -51,14 +51,14 @@ export default function (props) {
   const showMessages = canShowMessages();
   const showSettings = mode === "Settings";
 
-  useEffect(() => {
+  /*useEffect(() => {
     let interval = setInterval(() => {
       props.refetchAcc();
     }, 3500);
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, []);*/
 
   return (
     <div className="first">

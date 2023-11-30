@@ -5,6 +5,7 @@ import GroupSettings from "./GroupSettings";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import authHeader from "../services/AuthHeader";
+import useWebSocket, { ReadyState } from "react-use-websocket"
 
 export default function (props) {
   const showMessWindow = props.rightPanelMode === "messWin";
@@ -19,13 +20,16 @@ export default function (props) {
   const users = allUsers.users;
 
   const [messages, setMessages] = useState([]);
+  const WS_URL = "wss://localhost:7129/QueueWS?queueId=" + queueId;
+  const { lastMessage } = useWebSocket(WS_URL);
   function fetchMessages(id) {
+    let userId = localStorage.getItem("userId");
     axios
       .get(
         "https://localhost:7129/api/Messages/" +
           id +
           "/10?userId=" +
-          props.account.userId,
+          userId,
         {
           headers: authHeader(),
         }
@@ -58,17 +62,17 @@ export default function (props) {
   }
 
   useEffect(() => {
-    fetchMessages(queueId);
-  }, [queueId]);
+    if (lastMessage?.data === 'New message') {
+      fetchMessages(queueId);
+    }
+  }, [lastMessage, queueId, props.account]);
+
 
   useEffect(() => {
-    let interval = setInterval(() => {
-      fetchMessages(queueId);
-    }, 2500);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [queueId]);
+
+    fetchMessages(queueId);
+  }, [queueId, props.account]);
+
 
   return (
     <div className="second">

@@ -51,52 +51,67 @@ export default function (props) {
     return format(date, "H:mma");
   }
 
+
+
+
+  function Bubble(message, index){
+    const sender = props.users.find((i) => i.userId == message.sender);
+    const symbol = message.mess.includes("@" + loggedAcc);
+
+    if(loggedAcc === sender?.userName){
+      return (
+          <div key={index} className="messParentReply">
+
+            <div className="wrapper2">
+<div className="wrapper3">
+              <div className="messTimeReply">
+                {formatDate(message?.sent ?? "")}
+              </div>
+              {" "}
+              <div className="messName">
+                <b>{sender?.userName ?? ""}</b>
+              </div>
+</div>
+              <div className="messMessageReply">
+                <div style={{color: symbol ? "#5a94fd" : "white",backgroundColor:"purple", width: "fit-content", padding:"7pt", borderRadius:"25px"}}>{message.mess}</div>
+                <FontAwesomeIcon
+                    icon={["fas", sender?.avatar ?? "user"]}
+                    size="xl"
+                />{" "}
+              </div>
+            </div>
+          </div>
+      );
+    }
+    else{
+      return(
+      <div key={index} className="messParent">
+        <div className="wrapper2">
+          <div className="messName">
+            <b>{sender?.userName ?? ""}</b>
+          </div>
+          <div className="messTime">
+            {formatDate(message?.sent ?? "")}
+          </div>
+          <div className="messMessage">
+            <FontAwesomeIcon
+                icon={["fas", sender?.avatar ?? "user"]}
+                size="xl"
+            />
+            <div style={{color: symbol ? "blue" : "black",backgroundColor:"#e0e0e0", width: "fit-content", padding:"7pt", borderRadius:"25px",marginLeft:"3px"}}>{message.mess}</div>
+          </div>
+        </div>
+      </div>
+      );
+    }
+  }
+
+
   return (
     <div>
       {messages.map((message, index) => {
-        const sender = props.users.find((i) => i.userId == message.sender);
-        let symbol = message.mess.includes("@" + loggedAcc);
-        if (symbol) {
-          return (
-            <div key={index} className="messParent">
-              <div className="wrapper1">
-                <FontAwesomeIcon
-                  icon={["fas", sender?.avatar ?? "user"]}
-                  size="xl"
-                />{" "}
-              </div>
-              <div className="wrapper2">
-                <div className="messName">
-                  <b>{sender?.userName ?? ""}</b>
-                </div>
-                <div className="messTime">
-                  {formatDate(message?.sent ?? "")}
-                </div>
-                <div className="mention">{message.mess}</div>
-              </div>
-            </div>
-          );
-        } else {
-          return (
-            <div key={index} className="messParent">
-              <div className="wrapper1">
-                <FontAwesomeIcon
-                  icon={["fas", sender?.avatar ?? "user"]}
-                  size="xl"
-                />{" "}
-              </div>
-              <div className="wrapper2">
-                <div className="messName">
-                  <b>{sender?.userName ?? ""}</b>
-                </div>
-                <div className="messTime">
-                  {formatDate(message?.sent ?? "")}
-                </div>
-                <div className="messMessage">{message.mess}</div>
-              </div>
-            </div>
-          );
-        }
+
+          return Bubble(message, index);
       })}
     </div>
   );
