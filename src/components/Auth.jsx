@@ -146,6 +146,7 @@ export default function (props) {
         className="buttonButtonButton"
         variant="primary"
         onClick={validateThenLogin}
+        style={{cursor:"pointer"}}
       >
         {param}
       </Button>

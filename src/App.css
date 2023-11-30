@@ -8,7 +8,8 @@ body {
 html{
   height: 100vh;
   width: 100%;
-  background-image: linear-gradient(to right bottom, #000000, #2a071a, #470037, #5d0061, #610096);
+  background-image: linear-gradient(to right bottom, #0D0023FF, #1c1c1c);
+/* background-color: rgb(13, 0, 35)*/;
 
 }
 
@@ -214,7 +215,8 @@ flex: 1;
 }
 
 .leftPanelUpper {
-  background-image: linear-gradient(to left top, #000000, #2a071a, #470037, #5d0061, #610096);
+  /*background-image: linear-gradient(to left top, #000000, #2a071a, #470037, #5d0061, #610096);*/
+  background-color: rgb(64, 0, 79);
   border-radius: 15px 15px 0px 0px;
   flex: 1;
   display: flex;
@@ -230,7 +232,8 @@ flex: 1;
 
 .leftPanelLower {
   flex: 1;
-  background-image: linear-gradient(to left top, #000000, #2a071a, #470037, #5d0061, #610096);
+ /* background-image: linear-gradient(to left top, #000000, #2a071a, #470037, #5d0061, #610096);*/
+  background-color: rgb(64, 0, 79);
   border-radius: 0px 0px 15px 15px ;
   display: flex;
   align-items: center;
@@ -239,7 +242,8 @@ flex: 1;
 }
 
 .rightPanelUpper {
-  background-image: linear-gradient(to left top, #000000, #2a071a, #470037, #5d0061, #610096);
+ /* background-image: linear-gradient(to left top, #000000, #2a071a, #470037, #5d0061, #610096);*/
+  background-color: rgb(64, 0, 79);
 flex: 1;
   border-radius: 15px 15px 0px 0px;
   display: flex;
@@ -249,7 +253,7 @@ flex: 1;
 }
 
 .rightPanelMid {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   overflow: auto;
   flex: 12;
   flex-direction: column-reverse;

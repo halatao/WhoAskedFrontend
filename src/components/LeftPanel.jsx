@@ -67,12 +67,12 @@ export default function (props) {
     <div className="first">
       <div className="leftPanelUpper">
         <div className="leftPanelMessButt">
-          <FontAwesomeIcon style={{cursor:"pointer"}} icon="fa-solid fa-comments" onClick={() => {
+          <FontAwesomeIcon style={{cursor:"pointer"}} icon="fa-solid fa-comments" size="lg" onClick={() => {
             setMode("mess");
           }}/>
         </div>
         <div className="leftPanelSettButt">
-          <FontAwesomeIcon style={{cursor:"pointer"}} icon="fa-solid fa-gear" onClick={() => {
+          <FontAwesomeIcon style={{cursor:"pointer"}} icon="fa-solid fa-gear" size="lg" onClick={() => {
             setMode("Settings");
           }}/>
         </div>
@@ -113,7 +113,7 @@ export default function (props) {
             <label>{props.account.userName}</label>
           </div>
           <div className="leftLowerButton">
-            <FontAwesomeIcon style={{cursor:"pointer"}} icon="fa-solid fa-arrow-right-from-bracket" onClick={props.setLogout}/>
+            <FontAwesomeIcon style={{cursor:"pointer"}} size="lg" icon="fa-solid fa-arrow-right-from-bracket" onClick={props.setLogout}/>
           </div>
         </div>
       </div>
